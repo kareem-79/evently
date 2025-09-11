@@ -15,12 +15,7 @@ class MainLayout extends StatefulWidget {
 class _MainLayoutState extends State<MainLayout> {
   int selectedIndex = 0;
 
-  final List<Widget> tabs = [
-    HomeTab(),
-    MapTab(),
-    FavTab(),
-    ProfileTab(),
-  ];
+  final List<Widget> tabs = [HomeTab(), MapTab(), FavTab(), ProfileTab()];
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +30,6 @@ class _MainLayoutState extends State<MainLayout> {
       bottomNavigationBar: BottomAppBar(
         notchMargin: 8,
         child: BottomNavigationBar(
-
           currentIndex: selectedIndex,
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Colors.white,
