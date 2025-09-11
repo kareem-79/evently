@@ -64,6 +64,11 @@ class ThemeManager {
       ),
     ),
     textTheme: TextTheme(
+      bodySmall: GoogleFonts.inter(
+        fontSize: 14.sp,
+        color: ColorsManager.black,
+        fontWeight: FontWeight.bold,
+      ),
       titleSmall: GoogleFonts.inter(
         fontSize: 16.sp,
         color: ColorsManager.black,
@@ -82,7 +87,12 @@ class ThemeManager {
       headlineMedium: GoogleFonts.inter(
         fontSize: 16.sp,
         color: ColorsManager.blue,
-        fontWeight: FontWeight.w400,)
+        fontWeight: FontWeight.w400,),
+      titleMedium: GoogleFonts.inter(
+        fontSize: 20.sp,
+        color: ColorsManager.blue,
+        fontWeight: FontWeight.bold,),
+
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: Colors.transparent,
@@ -95,7 +105,9 @@ class ThemeManager {
     bottomAppBarTheme: BottomAppBarTheme(
       color: ColorsManager.blue,
       shape: const CircularNotchedRectangle(),
-
+    ),
+    cardTheme: CardThemeData(
+      color: Colors.white
     )
   );
   static final ThemeData dark = ThemeData();

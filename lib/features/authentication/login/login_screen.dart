@@ -190,7 +190,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
   void _login() {
     if (formKey.currentState?.validate() ?? false) {
-      print("Now login...");
       Navigator.pushReplacementNamed(context, RoutesManager.mainLayout);
     }
   }
