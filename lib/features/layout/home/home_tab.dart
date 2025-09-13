@@ -2,6 +2,7 @@ import 'package:evently/core/resources/colors_manager.dart';
 import 'package:evently/core/widget/custom_tap_item.dart';
 import 'package:evently/core/widget/custom_tap_bar.dart';
 import 'package:evently/core/widget/event_item.dart';
+import 'package:evently/core/widget/event_model.dart';
 import 'package:evently/model/category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -82,7 +83,7 @@ class _HomeTabState extends State<HomeTab> {
         ),
         Expanded(child: ListView.builder(
           padding: EdgeInsets.zero,
-          itemBuilder: (context, index) => EventItem(),
+          itemBuilder: (context, index) => EventItem(event:EventModel(categoryModel: CategoryModel.categoryWithAll[2], title: "meeting", description: "Meeting for Updating The Development Method ", dateTime: DateTime.now(), timeOfDay: TimeOfDay.now()),),
           itemCount: 20,
 
         ))

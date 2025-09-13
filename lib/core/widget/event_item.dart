@@ -1,10 +1,12 @@
 import 'package:evently/core/resources/assets_manager.dart';
 import 'package:evently/core/resources/colors_manager.dart';
+import 'package:evently/core/widget/event_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EventItem extends StatelessWidget {
-  const EventItem({super.key});
+  const EventItem({super.key, required this.event});
+  final EventModel event;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +31,9 @@ class EventItem extends StatelessWidget {
               padding: EdgeInsets.all(8.0.sp),
               child: Column(
                 children: [
-                  Text("21", style: Theme.of(context).textTheme.titleMedium),
+                  Text("${event.dateTime.day}", style: Theme.of(context).textTheme.titleMedium),
                   Text(
-                    "Nov",
+                    "${event.dateTime.month}",
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -51,7 +53,7 @@ class EventItem extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "Meeting for Updating The Development Method ",
+                      event.description,
                       style: Theme.of(context).textTheme.bodySmall
                     ),
                   ),
