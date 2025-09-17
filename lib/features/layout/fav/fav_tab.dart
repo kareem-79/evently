@@ -22,11 +22,7 @@ class FavTab extends StatelessWidget {
                 prefixIcon: Icon(Icons.search),
                 prefixIconColor: ColorsManager.blue,
                 label: Text("Search for Event"),
-                labelStyle: GoogleFonts.inter(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                  color: ColorsManager.blue,
-                ),
+                labelStyle: Theme.of(context).textTheme.displaySmall
               ),
             ),
             Expanded(

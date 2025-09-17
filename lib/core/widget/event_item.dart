@@ -4,6 +4,7 @@ import 'package:evently/core/resources/colors_manager.dart';
 import 'package:evently/core/widget/event_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class EventItem extends StatelessWidget {
   const EventItem({super.key, required this.event});
@@ -35,7 +36,9 @@ class EventItem extends StatelessWidget {
                   Text("${event.dateTime.day}", style: Theme.of(context).textTheme.titleMedium),
                   Text(
                     event.dateTime.viewMonth,
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    style: GoogleFonts.inter(
+                      fontSize: 16.sp,
+                      color: ColorsManager.blue,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

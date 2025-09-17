@@ -18,7 +18,7 @@ class ProfileTab extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
           width: double.infinity,
           decoration: BoxDecoration(
-            color: ColorsManager.blue,
+            color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(44)),
           ),
           child: SafeArea(

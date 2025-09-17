@@ -32,7 +32,9 @@ class CustomDropDown extends StatelessWidget {
                 Text(selectedItems,style: GoogleFonts.inter(fontSize: 20,fontWeight: FontWeight.bold,color: ColorsManager.blue),),
                 DropdownButton<String>(
                   underline: Container(),
-
+                  dropdownColor: Theme.of(context).shadowColor,
+                  iconEnabledColor: ColorsManager.blue,
+                  style: Theme.of(context).textTheme.displayMedium,
                   borderRadius: BorderRadius.circular(12.r),
                   items: menuItems.map((String value) {
                     return DropdownMenuItem<String>(

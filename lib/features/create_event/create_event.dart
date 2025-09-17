@@ -86,6 +86,7 @@ class _CreateEventState extends State<CreateEvent> {
                 SizedBox(height: 8.h),
                 CustomTextFormFiled(
                   label: "Event Description",
+                  prefixIcon: Icons.description,
                   controller: descriptionController,
                   validator: (input) {
                     if(input==null||input.trim().isEmpty){

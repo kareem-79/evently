@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 class ThemeManager {
   static final ThemeData light = ThemeData(
     primaryColor: ColorsManager.blue,
+    shadowColor: ColorsManager.whiteBlue,
     useMaterial3: false,
     iconTheme: IconThemeData(color: ColorsManager.black),
     appBarTheme: AppBarTheme(
@@ -80,15 +81,15 @@ class ThemeManager {
         color: ColorsManager.white,
         fontWeight: FontWeight.w400,
       ),
-      headlineLarge: GoogleFonts.inter(
-        fontSize: 24.sp,
-        color: ColorsManager.white,
-        fontWeight: FontWeight.bold,
-      ),
       headlineMedium: GoogleFonts.inter(
         fontSize: 16.sp,
         color: ColorsManager.blue,
         fontWeight: FontWeight.w400,
+      ),
+      headlineLarge: GoogleFonts.inter(
+        fontSize: 24.sp,
+        color: ColorsManager.white,
+        fontWeight: FontWeight.bold,
       ),
       titleMedium: GoogleFonts.inter(
         fontSize: 20.sp,
@@ -101,9 +102,19 @@ class ThemeManager {
         color: ColorsManager.black,
       ),
       labelSmall: GoogleFonts.inter(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          color: ColorsManager.black)
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: ColorsManager.black,
+      ),
+      displayMedium: GoogleFonts.inter(
+        fontSize: 18.sp,
+        color: ColorsManager.blue,
+      ),
+      displaySmall: GoogleFonts.inter(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: ColorsManager.blue,
+      ),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: Colors.transparent,
@@ -119,5 +130,131 @@ class ThemeManager {
     ),
     cardTheme: CardThemeData(color: Colors.white),
   );
-  static final ThemeData dark = ThemeData();
+  static final ThemeData dark = ThemeData(
+    primaryColor: ColorsManager.darkBlue,
+    shadowColor: ColorsManager.darkBlue,
+    useMaterial3: false,
+    iconTheme: IconThemeData(color: ColorsManager.ofWhite),
+    appBarTheme: AppBarTheme(
+      backgroundColor: ColorsManager.darkBlue,
+      foregroundColor: ColorsManager.blue,
+      titleTextStyle: GoogleFonts.roboto(
+        fontSize: 22.sp,
+        color: ColorsManager.blue,
+      ),
+      centerTitle: true,
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: ColorsManager.darkBlue,
+      foregroundColor: ColorsManager.ofWhite,
+      shape: StadiumBorder(
+        side: BorderSide(color: ColorsManager.ofWhite, width: 4.w),
+      ),
+    ),
+    scaffoldBackgroundColor: ColorsManager.darkBlue,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsetsGeometry.all(14.sp),
+        backgroundColor: ColorsManager.blue,
+        foregroundColor: ColorsManager.whiteBlue,
+        textStyle: GoogleFonts.inter(
+          fontSize: 20.sp,
+          color: ColorsManager.white,
+          fontWeight: FontWeight.w500,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(12.r),
+        ),
+      ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      labelStyle: GoogleFonts.inter(
+        fontSize: 16.sp,
+        color: ColorsManager.ofWhite,
+        fontWeight: FontWeight.w400,
+      ),
+      prefixIconColor: ColorsManager.ofWhite,
+      suffixIconColor: ColorsManager.ofWhite,
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.r),
+        borderSide: BorderSide(color: ColorsManager.blue),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.r),
+        borderSide: BorderSide(color: ColorsManager.blue),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.r),
+        borderSide: BorderSide(color: ColorsManager.red),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.r),
+        borderSide: BorderSide(color: ColorsManager.red),
+      ),
+    ),
+    textTheme: TextTheme(
+      bodySmall: GoogleFonts.inter(
+        fontSize: 14.sp,
+        color: ColorsManager.ofWhite,
+        fontWeight: FontWeight.bold,
+      ),
+      titleSmall: GoogleFonts.inter(
+        fontSize: 16.sp,
+        color: ColorsManager.ofWhite,
+        fontWeight: FontWeight.bold,
+      ),
+      headlineSmall: GoogleFonts.inter(
+        fontSize: 14.sp,
+        color: ColorsManager.white,
+        fontWeight: FontWeight.w400,
+      ),
+      headlineLarge: GoogleFonts.inter(
+        fontSize: 24.sp,
+        color: ColorsManager.white,
+        fontWeight: FontWeight.bold,
+      ),
+      headlineMedium: GoogleFonts.inter(
+        fontSize: 16.sp,
+        color: ColorsManager.ofWhite,
+        fontWeight: FontWeight.w400,
+      ),
+      titleMedium: GoogleFonts.inter(
+        fontSize: 20.sp,
+        color: ColorsManager.blue,
+        fontWeight: FontWeight.bold,
+      ),
+      labelMedium: GoogleFonts.inter(
+        fontSize: 20.sp,
+        fontWeight: FontWeight.bold,
+        color: ColorsManager.ofWhite,
+      ),
+      labelSmall: GoogleFonts.inter(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: ColorsManager.ofWhite,
+      ),
+      displayMedium: GoogleFonts.inter(
+        fontSize: 18.sp,
+        color: ColorsManager.ofWhite,
+      ),
+      displaySmall: GoogleFonts.inter(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: ColorsManager.ofWhite,
+      ),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: ColorsManager.ofWhite,
+      unselectedItemColor: ColorsManager.ofWhite,
+      showUnselectedLabels: false,
+    ),
+    bottomAppBarTheme: BottomAppBarTheme(
+      color: ColorsManager.darkBlue,
+      shape: const CircularNotchedRectangle(),
+    ),
+    cardTheme: CardThemeData(color: ColorsManager.darkBlue),
+  );
 }
