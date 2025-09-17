@@ -1,5 +1,4 @@
 import 'package:evently/core/resources/colors_manager.dart';
-import 'package:evently/core/widget/custom_tap_item.dart';
 import 'package:evently/core/widget/custom_tap_bar.dart';
 import 'package:evently/core/widget/event_item.dart';
 import 'package:evently/core/widget/event_model.dart';
@@ -50,7 +49,7 @@ class _HomeTabState extends State<HomeTab> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Icon(Icons.location_on_outlined),
+                              Icon(Icons.location_on_outlined,color: ColorsManager.white,),
                               SizedBox(width: 4.w),
                               Text(
                                 "Cairo,Egypt",
@@ -61,7 +60,7 @@ class _HomeTabState extends State<HomeTab> {
                         ],
                       ),
                       Spacer(),
-                      Icon(Icons.light_mode_outlined),
+                      Icon(Icons.light_mode_outlined,color: ColorsManager.white),
                       Card(
                         child: Padding(
                           padding: EdgeInsets.all(8.0.sp),

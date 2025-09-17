@@ -1,4 +1,5 @@
 import 'package:evently/core/resources/colors_manager.dart';
+import 'package:evently/core/resources/routes_manager.dart';
 import 'package:evently/features/layout/fav/fav_tab.dart';
 import 'package:evently/features/layout/home/home_tab.dart';
 import 'package:evently/features/layout/map/map_tab.dart';
@@ -24,7 +25,9 @@ class _MainLayoutState extends State<MainLayout> {
       body: tabs[selectedIndex],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, RoutesManager.createEvent);
+        },
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomAppBar(

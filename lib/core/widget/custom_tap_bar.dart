@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'custom_tap_item.dart';
 import '../../model/category_model.dart';
-import '../resources/colors_manager.dart';
 
 class CustomTapBar extends StatefulWidget {
   const CustomTapBar({
@@ -41,13 +40,13 @@ class _CustomTapBarState extends State<CustomTapBar> {
         },
         indicatorColor: Colors.transparent,
         isScrollable: true,
-        tabs: CategoryModel.categoryWithAll
+        tabs: widget.categories
             .map(
               (category) => CustomTabItem(
                 category: category,
                 isSelected:
                     selectedIndex ==
-                    CategoryModel.categoryWithAll.indexOf(category),
+                    widget.categories.indexOf(category),
                 selectedBgColor: widget.selectedBgColor,
                 selectedFgColor: widget.selectedFgColor,
                 unSelectedBgColor: widget.unSelectedBgColor,

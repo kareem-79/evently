@@ -1,3 +1,4 @@
+import 'package:evently/core/extension/date_time_extension.dart';
 import 'package:evently/core/resources/assets_manager.dart';
 import 'package:evently/core/resources/colors_manager.dart';
 import 'package:evently/core/widget/event_model.dart';
@@ -33,7 +34,7 @@ class EventItem extends StatelessWidget {
                 children: [
                   Text("${event.dateTime.day}", style: Theme.of(context).textTheme.titleMedium),
                   Text(
-                    "${event.dateTime.month}",
+                    event.dateTime.viewMonth,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),

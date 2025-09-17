@@ -2,7 +2,6 @@ import 'package:evently/core/resources/colors_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../core/widget/event_item.dart';
 import '../../../core/widget/event_model.dart';
 import '../../../model/category_model.dart';
@@ -30,7 +29,20 @@ class FavTab extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(child: ListView.builder(itemBuilder: (context, index) => EventItem(event:EventModel(categoryModel: CategoryModel.categoryWithAll[2], title: "meeting", description: "Meeting for Updating The Development Method ", dateTime: DateTime.now(), timeOfDay: TimeOfDay.now())),itemCount: 10,))
+            Expanded(
+              child: ListView.builder(
+                itemBuilder: (context, index) => EventItem(
+                  event: EventModel(
+                    categoryModel: CategoryModel.categoryWithAll[2],
+                    title: "meeting",
+                    description: "Meeting for Updating The Development Method ",
+                    dateTime: DateTime.now(),
+                    timeOfDay: TimeOfDay.now(),
+                  ),
+                ),
+                itemCount: 10,
+              ),
+            ),
           ],
         ),
       ),
