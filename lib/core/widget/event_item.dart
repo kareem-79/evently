@@ -64,7 +64,7 @@ class EventItem extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.favorite_border, color: ColorsManager.black),
+                  icon: Icon(Icons.favorite_border),
                 ),
               ],
             ),

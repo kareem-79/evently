@@ -1,4 +1,5 @@
 import 'package:evently/core/resources/colors_manager.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,20 +17,23 @@ class FavTab extends StatelessWidget {
       child: SafeArea(
         child: Column(
           children: [
-            TextFormField(
-              decoration: InputDecoration(
-                focusColor: ColorsManager.blue,
-                prefixIcon: Icon(Icons.search),
-                prefixIconColor: ColorsManager.blue,
-                label: Text("Search for Event"),
-                labelStyle: Theme.of(context).textTheme.displaySmall
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  focusColor: ColorsManager.blue,
+                  prefixIcon: Icon(Icons.search),
+                  prefixIconColor: ColorsManager.blue,
+                  label: Text(AppLocalizations.of(context)!.search_for_event),
+                  labelStyle: Theme.of(context).textTheme.displaySmall
+                ),
               ),
             ),
             Expanded(
               child: ListView.builder(
                 itemBuilder: (context, index) => EventItem(
                   event: EventModel(
-                    categoryModel: CategoryModel.categoryWithAll[2],
+                    categoryModel: CategoryModel.categoryWithAll(context)[2],
                     title: "meeting",
                     description: "Meeting for Updating The Development Method ",
                     dateTime: DateTime.now(),

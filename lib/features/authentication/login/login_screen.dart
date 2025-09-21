@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../core/resources/assets_manager.dart';
 import '../../../core/utils/validation.dart';
 import '../../../core/widget/custom_text_form_filed.dart';
+import '../../../l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -55,14 +56,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 CustomTextFormFiled(
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
-                  label: "E-mail",
+                  label: AppLocalizations.of(context)!.email,
                   prefixIcon: Icons.email,
                   validator: (input) {
                     if(input==null||input.trim().isEmpty){
-                      return "E-mail is Required";
+                      return AppLocalizations.of(context)!.email_required;
                     }
                     if(!Validation.isValidateEmail(input)){
-                      return "E-mail is not validate";
+                      return AppLocalizations.of(context)!.email_invalid;
                     }
                     return null;
                   },
@@ -70,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 CustomTextFormFiled(
                   controller: passwordController,
                   secure: secure,
-                  label: "Password",
+                  label: AppLocalizations.of(context)!.password,
                   prefixIcon: Icons.lock,
                   suffixIcon: IconButton(
                     onPressed: () {
@@ -81,10 +82,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   validator: (input) {
                     if(input==null||input.trim().isEmpty){
-                      return "Password is Required";
+                      return AppLocalizations.of(context)!.password_required;
                     }
                     if(input.length<8){
-                      return "Sorry,Password should be at least 8 char";
+                      return AppLocalizations.of(context)!.password_min;
                     }
                     return null;
                   },
@@ -94,13 +95,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      CustomTextButton(onPress: () {}, text: "Forget Password ?"),
+                      CustomTextButton(onPress: () {}, text: AppLocalizations.of(context)!.forget_password),
                     ],
                   ),
                 ),
                 CustomElevatedButton(
                   onPress: _login,
-                  text: "Login",
+                  text: AppLocalizations.of(context)!.login,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.sp),
@@ -108,9 +109,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Don’t Have Account ?",
+                        AppLocalizations.of(context)!.do_not_have_account,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
+                      SizedBox(width: 2.w,),
                       CustomTextButton(
                         onPress: () {
                           Navigator.pushReplacementNamed(
@@ -118,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             RoutesManager.register,
                           );
                         },
-                        text: "Create Account",
+                        text: AppLocalizations.of(context)!.create_account,
                       ),
                     ],
                   ),
@@ -135,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     Text(
-                      "Or",
+                      AppLocalizations.of(context)!.or,
                       style: GoogleFonts.inter(
                         fontSize: 16.sp,
                         color: ColorsManager.blue,
@@ -169,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Image.asset(ImageAssets.googleLogo),
                         SizedBox(width: 10.w),
                         Text(
-                          "Login With Google",
+                          AppLocalizations.of(context)!.login_with_google,
                           style: GoogleFonts.inter(
                             fontSize: 20.sp,
                             fontWeight: FontWeight.bold,

@@ -2,6 +2,7 @@ import 'package:evently/core/resources/colors_manager.dart';
 import 'package:evently/core/widget/custom_tap_bar.dart';
 import 'package:evently/core/widget/event_item.dart';
 import 'package:evently/core/widget/event_model.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/model/category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,7 +40,7 @@ class _HomeTabState extends State<HomeTab> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Welcome Back ✨",
+                            AppLocalizations.of(context)!.welcome,
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
                           Text(
@@ -49,44 +50,65 @@ class _HomeTabState extends State<HomeTab> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Icon(Icons.location_on_outlined,color: ColorsManager.white,),
+                              Icon(
+                                Icons.location_on_outlined,
+                                color: ColorsManager.white,
+                              ),
                               SizedBox(width: 4.w),
                               Text(
                                 "Cairo,Egypt",
-                                style: Theme.of(context).textTheme.headlineSmall,
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.headlineSmall,
                               ),
                             ],
                           ),
                         ],
                       ),
                       Spacer(),
-                      Icon(Icons.light_mode_outlined,color: ColorsManager.white),
+                      Icon(
+                        Icons.light_mode_outlined,
+                        color: ColorsManager.white,
+                      ),
                       Card(
                         child: Padding(
                           padding: EdgeInsets.all(8.0.sp),
                           child: Text(
-                            "En",
+                            AppLocalizations.of(context)!.en,
                             style: Theme.of(context).textTheme.headlineMedium,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 10.h,),
-                  CustomTapBar(categories: CategoryModel.categoryWithAll,selectedBgColor: ColorsManager.whiteBlue,selectedFgColor: ColorsManager.blue,unSelectedBgColor: Colors.transparent,unSelectedFgColor: ColorsManager.white,)
-
+                  SizedBox(height: 10.h),
+                  CustomTapBar(
+                    categories: CategoryModel.categoryWithAll(context),
+                    selectedBgColor: ColorsManager.whiteBlue,
+                    selectedFgColor: ColorsManager.blue,
+                    unSelectedBgColor: Colors.transparent,
+                    unSelectedFgColor: ColorsManager.white,
+                  ),
                 ],
               ),
             ),
           ),
         ),
-        Expanded(child: ListView.builder(
-          padding: EdgeInsets.zero,
-          itemBuilder: (context, index) => EventItem(event:EventModel(categoryModel: CategoryModel.categoryWithAll[2], title: "meeting", description: "Meeting for Updating The Development Method ", dateTime: DateTime.now(), timeOfDay: TimeOfDay.now()),),
-          itemCount: 20,
-
-        ))
-
+        Expanded(
+          child: ListView.builder(
+            padding: EdgeInsets.zero,
+            itemBuilder: (context, index) => EventItem(
+              event: EventModel(
+                categoryModel: CategoryModel.categoryWithAll(context)[2],
+                title: "meeting",
+                description: "Meeting for Updating The Development Method ",
+                dateTime: DateTime.now(),
+                timeOfDay: TimeOfDay.now(),
+              ),
+            ),
+            itemCount: 20,
+          ),
+        ),
       ],
     );
   }

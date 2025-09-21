@@ -1,7 +1,10 @@
 import 'package:evently/config/theme/theme_manager.dart';
 import 'package:evently/core/resources/routes_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'l10n/app_localizations.dart';
 
 void main(){
   runApp(Evently());
@@ -21,8 +24,24 @@ class Evently extends StatelessWidget {
         initialRoute: RoutesManager.mainLayout,
         theme: ThemeManager.light,
         darkTheme: ThemeManager.dark,
-        themeMode: ThemeMode.dark,
-        locale: Locale("en"),
+        themeMode: ThemeMode.light,
+        locale: Locale("fr"),
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          Locale('en'),
+          Locale('es'),
+          Locale('ar'),
+          Locale('fr'),
+          Locale('ja'),
+          Locale('ru'),
+          Locale('zh'),
+        ],
+
       ),
     );
   }

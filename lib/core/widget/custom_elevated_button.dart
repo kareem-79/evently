@@ -10,7 +10,7 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding:EdgeInsets.symmetric(vertical: 16.0.sp),
-      child: ElevatedButton(onPressed: onPress, child: Text(text),),
+      child: ElevatedButton(onPressed: onPress, child: Text(text)),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:evently/core/resources/assets_manager.dart';
 import 'package:evently/core/resources/colors_manager.dart';
 import 'package:evently/core/resources/routes_manager.dart';
 import 'package:evently/features/layout/profile/custom_drop_down.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,21 +61,35 @@ class ProfileTab extends StatelessWidget {
         ),
         SizedBox(height: 24.h),
         CustomDropDown(
-          label: 'Theme',
-          menuItems: ["Light", "Dark"],
-          selectedItems: 'Light',
+          label: AppLocalizations.of(context)!.theme,
+          menuItems: [
+            AppLocalizations.of(context)!.light,
+            AppLocalizations.of(context)!.dark,
+          ],
+          selectedItems: AppLocalizations.of(context)!.light,
         ),
         SizedBox(height: 12.h),
         CustomDropDown(
-          label: 'Language',
-          menuItems: ["English", "عربي"],
-          selectedItems: 'English',
+          label: AppLocalizations.of(context)!.language,
+          menuItems: [
+            AppLocalizations.of(context)!.english,
+            AppLocalizations.of(context)!.spanish,
+            AppLocalizations.of(context)!.arabic,
+            AppLocalizations.of(context)!.french,
+            AppLocalizations.of(context)!.chinese,
+            AppLocalizations.of(context)!.japanese,
+            AppLocalizations.of(context)!.russian,
+          ],
+          selectedItems: AppLocalizations.of(context)!.english,
         ),
-        Spacer(flex: 7),
+        Spacer(flex: 6),
         Padding(
           padding: EdgeInsets.all(10.0.sp),
           child: ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: ColorsManager.red,foregroundColor: ColorsManager.white),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ColorsManager.red,
+              foregroundColor: ColorsManager.white,
+            ),
             onPressed: () {
               Navigator.pushReplacementNamed(context, RoutesManager.login);
             },
@@ -82,12 +97,12 @@ class ProfileTab extends StatelessWidget {
               children: [
                 Icon(Icons.logout_outlined),
                 SizedBox(width: 8.w),
-                Text("Logout"),
+                Text(AppLocalizations.of(context)!.logout),
               ],
             ),
           ),
         ),
-        Spacer(flex: 3),
+        Spacer(flex: 4),
       ],
     );
   }
