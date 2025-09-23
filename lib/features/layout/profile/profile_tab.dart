@@ -3,15 +3,18 @@ import 'package:evently/core/resources/colors_manager.dart';
 import 'package:evently/core/resources/routes_manager.dart';
 import 'package:evently/features/layout/profile/custom_drop_down.dart';
 import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/provider/config_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class ProfileTab extends StatelessWidget {
   const ProfileTab({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var configProvider = Provider.of<ConfigProvider>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -20,7 +23,7 @@ class ProfileTab extends StatelessWidget {
           width: double.infinity,
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
-            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(44)),
+            borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(44)),
           ),
           child: SafeArea(
             bottom: false,
@@ -60,13 +63,23 @@ class ProfileTab extends StatelessWidget {
           ),
         ),
         SizedBox(height: 24.h),
+        /// Theme DropDown
         CustomDropDown(
           label: AppLocalizations.of(context)!.theme,
           menuItems: [
             AppLocalizations.of(context)!.light,
             AppLocalizations.of(context)!.dark,
           ],
-          selectedItems: AppLocalizations.of(context)!.light,
+          selectedItems: configProvider.isDarkEnable
+              ? AppLocalizations.of(context)!.dark
+              : AppLocalizations.of(context)!.light,
+          onChange: (newTheme) {
+            configProvider.changeAppTheme(
+              newTheme == AppLocalizations.of(context)!.light
+                  ? ThemeMode.light
+                  : ThemeMode.dark,
+            );
+          },
         ),
         SizedBox(height: 12.h),
         CustomDropDown(
@@ -80,9 +93,12 @@ class ProfileTab extends StatelessWidget {
             AppLocalizations.of(context)!.japanese,
             AppLocalizations.of(context)!.russian,
           ],
-          selectedItems: AppLocalizations.of(context)!.english,
+          selectedItems: _getSelectedLanguage(context, configProvider),
+          onChange: (newLanguage) {
+            configProvider.changeAppLanguage(_mapLanguageToCode(context, newLanguage!));
+          },
         ),
-        Spacer(flex: 6),
+        const Spacer(flex: 6),
         Padding(
           padding: EdgeInsets.all(10.0.sp),
           child: ElevatedButton(
@@ -95,15 +111,47 @@ class ProfileTab extends StatelessWidget {
             },
             child: Row(
               children: [
-                Icon(Icons.logout_outlined),
+                const Icon(Icons.logout_outlined),
                 SizedBox(width: 8.w),
                 Text(AppLocalizations.of(context)!.logout),
               ],
             ),
           ),
         ),
-        Spacer(flex: 4),
+        const Spacer(flex: 4),
       ],
     );
+  }
+
+  String _getSelectedLanguage(BuildContext context, ConfigProvider provider) {
+    switch (provider.appLanguageCode) {
+      case "en":
+        return AppLocalizations.of(context)!.english;
+      case "es":
+        return AppLocalizations.of(context)!.spanish;
+      case "ar":
+        return AppLocalizations.of(context)!.arabic;
+      case "fr":
+        return AppLocalizations.of(context)!.french;
+      case "zh":
+        return AppLocalizations.of(context)!.chinese;
+      case "ja":
+        return AppLocalizations.of(context)!.japanese;
+      case "ru":
+        return AppLocalizations.of(context)!.russian;
+      default:
+        return AppLocalizations.of(context)!.english;
+    }
+  }
+
+  String _mapLanguageToCode(BuildContext context, String lang) {
+    if (lang == AppLocalizations.of(context)!.english) return "en";
+    if (lang == AppLocalizations.of(context)!.spanish) return "es";
+    if (lang == AppLocalizations.of(context)!.arabic) return "ar";
+    if (lang == AppLocalizations.of(context)!.french) return "fr";
+    if (lang == AppLocalizations.of(context)!.chinese) return "zh";
+    if (lang == AppLocalizations.of(context)!.japanese) return "ja";
+    if (lang == AppLocalizations.of(context)!.russian) return "ru";
+    return "en";
   }
 }
