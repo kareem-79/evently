@@ -26,9 +26,9 @@ class CustomTapBar extends StatefulWidget {
 
 class _CustomTapBarState extends State<CustomTapBar> {
   int selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-
     return DefaultTabController(
       length: widget.categories.length,
       child: TabBar(
@@ -45,8 +45,7 @@ class _CustomTapBarState extends State<CustomTapBar> {
               (category) => CustomTabItem(
                 category: category,
                 isSelected:
-                    selectedIndex ==
-                    widget.categories.indexOf(category),
+                    selectedIndex == widget.categories.indexOf(category),
                 selectedBgColor: widget.selectedBgColor,
                 selectedFgColor: widget.selectedFgColor,
                 unSelectedBgColor: widget.unSelectedBgColor,

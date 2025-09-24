@@ -12,10 +12,9 @@ class PrefsManager {
   static void saveTheme(ThemeMode themeMode) {
     String theme = themeMode == ThemeMode.light ? "Light" : "Dark";
     prefs.setString(ChachConstant.themeKey, theme);
-
   }
 
-  static ThemeMode? getSavedTheme()  {
+  static ThemeMode? getSavedTheme() {
     String? savedTheme = prefs.getString(ChachConstant.themeKey);
     if (savedTheme != null) {
       if (savedTheme == "Light") {
@@ -26,12 +25,13 @@ class PrefsManager {
     }
     return null;
   }
-  static void saveLocale(Locale locale) {
-    prefs.setString(ChachConstant.localeKey, locale.languageCode);
+
+  static void saveLanguage(Locale language) {
+    prefs.setString(ChachConstant.languageKey, language.languageCode);
   }
 
-  static Locale? getSavedLocale() {
-    String? savedCode = prefs.getString(ChachConstant.localeKey);
+  static Locale? getSavedLanguage() {
+    String? savedCode = prefs.getString(ChachConstant.languageKey);
     if (savedCode != null) {
       return Locale(savedCode);
     }

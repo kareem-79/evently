@@ -6,12 +6,14 @@ class ConfigProvider extends ChangeNotifier {
   Locale _locale = const Locale("en");
 
   bool get isDarkEnable => currentTheme == ThemeMode.dark;
+
   Locale get locale => _locale;
+
   String get appLanguageCode => _locale.languageCode;
 
   Future<void> loadSavedSettings() async {
     currentTheme = PrefsManager.getSavedTheme() ?? ThemeMode.light;
-    _locale = PrefsManager.getSavedLocale() ?? const Locale("en");
+    _locale = PrefsManager.getSavedLanguage() ?? const Locale("en");
     notifyListeners();
   }
 
@@ -25,20 +27,20 @@ class ConfigProvider extends ChangeNotifier {
   void setLocale(Locale locale) {
     if (!_supportedLanguages.contains(locale.languageCode)) return;
     _locale = locale;
-    PrefsManager.saveLocale(locale);
+    PrefsManager.saveLanguage(locale);
     notifyListeners();
   }
 
   void changeAppLanguage(String code) {
     if (!_supportedLanguages.contains(code)) return;
     _locale = Locale(code);
-    PrefsManager.saveLocale(_locale);
+    PrefsManager.saveLanguage(_locale);
     notifyListeners();
   }
 
   void clearLocale() {
     _locale = const Locale("en");
-    PrefsManager.saveLocale(_locale);
+    PrefsManager.saveLanguage(_locale);
     notifyListeners();
   }
 

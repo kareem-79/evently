@@ -70,23 +70,25 @@ class _HomeTabState extends State<HomeTab> {
                         ],
                       ),
                       Spacer(),
-                      PrefsManager.getSavedTheme()==ThemeMode.dark?IconButton(
-                        onPressed: () {
-                          configProvider.changeAppTheme(ThemeMode.light);
-                        },
-                        icon: Icon(
-                          Icons.light_mode_outlined,
-                          color: ColorsManager.white,
-                        ),
-                      ):IconButton(
-                        onPressed: (){
-                          configProvider.changeAppTheme(ThemeMode.dark);
-                        },
-                        icon:Icon(
-                          Icons.dark_mode_outlined,
-                          color: ColorsManager.white,
-                        ),
-                      ),
+                      PrefsManager.getSavedTheme() == ThemeMode.dark
+                          ? IconButton(
+                              onPressed: () {
+                                configProvider.changeAppTheme(ThemeMode.light);
+                              },
+                              icon: Icon(
+                                Icons.light_mode_outlined,
+                                color: ColorsManager.white,
+                              ),
+                            )
+                          : IconButton(
+                              onPressed: () {
+                                configProvider.changeAppTheme(ThemeMode.dark);
+                              },
+                              icon: Icon(
+                                Icons.dark_mode_outlined,
+                                color: ColorsManager.white,
+                              ),
+                            ),
                       // Card(
                       //   child: Padding(
                       //     padding: EdgeInsets.all(8.0.sp),
