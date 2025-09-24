@@ -1,11 +1,14 @@
+import 'package:evently/core/prefs_manager/prefs_manager.dart';
 import 'package:evently/core/resources/colors_manager.dart';
 import 'package:evently/core/widget/custom_tap_bar.dart';
 import 'package:evently/core/widget/event_item.dart';
 import 'package:evently/core/widget/event_model.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/model/category_model.dart';
+import 'package:evently/provider/config_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
@@ -17,6 +20,7 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
+    var configProvider = Provider.of<ConfigProvider>(context);
     return Column(
       children: [
         Container(
@@ -66,19 +70,32 @@ class _HomeTabState extends State<HomeTab> {
                         ],
                       ),
                       Spacer(),
-                      Icon(
-                        Icons.light_mode_outlined,
-                        color: ColorsManager.white,
-                      ),
-                      Card(
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0.sp),
-                          child: Text(
-                            AppLocalizations.of(context)!.en,
-                            style: Theme.of(context).textTheme.headlineMedium,
-                          ),
+                      PrefsManager.getSavedTheme()==ThemeMode.dark?IconButton(
+                        onPressed: () {
+                          configProvider.changeAppTheme(ThemeMode.light);
+                        },
+                        icon: Icon(
+                          Icons.light_mode_outlined,
+                          color: ColorsManager.white,
+                        ),
+                      ):IconButton(
+                        onPressed: (){
+                          configProvider.changeAppTheme(ThemeMode.dark);
+                        },
+                        icon:Icon(
+                          Icons.dark_mode_outlined,
+                          color: ColorsManager.white,
                         ),
                       ),
+                      // Card(
+                      //   child: Padding(
+                      //     padding: EdgeInsets.all(8.0.sp),
+                      //     child: Text(
+                      //       AppLocalizations.of(context)!.en,
+                      //       style: Theme.of(context).textTheme.headlineMedium,
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                   SizedBox(height: 10.h),

@@ -1,4 +1,5 @@
 import 'package:evently/config/theme/theme_manager.dart';
+import 'package:evently/core/prefs_manager/prefs_manager.dart';
 import 'package:evently/core/resources/routes_manager.dart';
 import 'package:evently/provider/config_provider.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +9,14 @@ import 'package:provider/provider.dart';
 
 import 'l10n/app_localizations.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await PrefsManager.init();
+  final configProvider = ConfigProvider();
+  await configProvider.loadSavedSettings();
   runApp(
     ChangeNotifierProvider(
-      create: (context) => ConfigProvider(),
+      create: (context) => configProvider,
       child: const Evently(),
     ),
   );

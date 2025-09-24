@@ -84,7 +84,7 @@ class ThemeManager {
       headlineMedium: GoogleFonts.inter(
         fontSize: 16.sp,
         color: ColorsManager.blue,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.bold,
       ),
       headlineLarge: GoogleFonts.inter(
         fontSize: 24.sp,
@@ -216,7 +216,7 @@ class ThemeManager {
       headlineMedium: GoogleFonts.inter(
         fontSize: 16.sp,
         color: ColorsManager.ofWhite,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.bold,
       ),
       titleMedium: GoogleFonts.inter(
         fontSize: 20.sp,
