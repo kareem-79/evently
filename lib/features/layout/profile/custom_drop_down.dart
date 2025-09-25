@@ -1,8 +1,8 @@
+import 'package:evently/core/resources/colors_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../core/resources/colors_manager.dart';
 
 class CustomDropDown extends StatelessWidget {
   const CustomDropDown({

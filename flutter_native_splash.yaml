@@ -1,13 +1,13 @@
 flutter_native_splash:
-  color: "#F2FEFF"
+  color: "F2FEFF"
   image: assets/images/evently_logo@4.png
-  color_dark: "#101127"
+  color_dark: "101127"
   image_dark: assets/images/evently_logo@4.png
   android_12:
    image: assets/images/android12splash.png
-   color: "#F2FEFF"
-   image_dark: assets/images/android12splash.png
-   color_dark: "#101127"
+   color: "F2FEFF"
+   image_dark: assets/images/android12splash_dark.png
+   color_dark: "101127"
   #icon_background_color_dark: "#eeeeee"
 
   # The android, ios and web parameters can be used to disable generating a splash screen on a given
