@@ -2,7 +2,6 @@ import 'package:evently/core/resources/colors_manager.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../../core/widget/event_item.dart';
 import '../../../core/widget/event_model.dart';
 import '../../../model/category_model.dart';
@@ -15,6 +14,7 @@ class FavTab extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(8.sp),
       child: SafeArea(
+        bottom: false,
         child: Column(
           children: [
             Padding(

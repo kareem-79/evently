@@ -1,3 +1,4 @@
+import 'package:evently/core/extension/date_time_extension.dart';
 import 'package:evently/core/resources/assets_manager.dart';
 import 'package:evently/core/resources/colors_manager.dart';
 import 'package:evently/core/widget/custom_elevated_button.dart';
@@ -20,6 +21,8 @@ class _CreateEventState extends State<CreateEvent> {
   late TextEditingController titleController;
   late TextEditingController descriptionController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  DateTime selectedDate=DateTime.now();
+  late  TimeOfDay selectedTime=TimeOfDay.now();
 
   @override
   void initState() {
@@ -108,18 +111,12 @@ class _CreateEventState extends State<CreateEvent> {
                     Icon(Icons.date_range_outlined),
                     SizedBox(width: 4.h),
                     Text(
-                      AppLocalizations.of(context)!.event_date,
+                      selectedDate.toFormatDate,
                       style: Theme.of(context).textTheme.labelSmall,
                     ),
                     Spacer(),
                     CustomTextButton(
-                      onPress: () {
-                        showDatePicker(
-                          context: context,
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime.now().add(Duration(days: 365)),
-                        );
-                      },
+                      onPress: _selectedEventDay,
                       text: AppLocalizations.of(context)!.choose_date,
                     ),
                   ],
@@ -130,17 +127,12 @@ class _CreateEventState extends State<CreateEvent> {
                     Icon(Icons.watch_later_outlined),
                     SizedBox(width: 4.h),
                     Text(
-                      AppLocalizations.of(context)!.event_time,
+                      selectedDate.toFormatTime,
                       style: Theme.of(context).textTheme.labelSmall,
                     ),
                     Spacer(),
                     CustomTextButton(
-                      onPress: () {
-                        showTimePicker(
-                          initialTime: TimeOfDay.now(),
-                          context: context,
-                        );
-                      },
+                      onPress: _selectEventTime,
                       text: AppLocalizations.of(context)!.choose_time,
                     ),
                   ],
@@ -189,5 +181,27 @@ class _CreateEventState extends State<CreateEvent> {
 
   void _addEvent() {
     if (_formKey.currentState?.validate() == false) return;
+  }
+
+  void _selectEventTime()async {
+    selectedTime=await showTimePicker(context: context, initialTime:TimeOfDay.now())??selectedTime;
+    selectedDate=selectedDate.copyWith(
+      hour: selectedTime.hour,
+      minute: selectedTime.minute
+    );
+    setState(() {
+
+    });
+  }
+
+  void _selectedEventDay() async{
+    selectedDate=await showDatePicker(context: context, firstDate: DateTime.now(), lastDate: DateTime.now().add(Duration(days: 365)))??selectedDate;
+    selectedDate=selectedDate.copyWith(
+        hour: selectedTime.hour,
+        minute: selectedTime.minute
+    );
+    setState(() {
+
+    });
   }
 }
