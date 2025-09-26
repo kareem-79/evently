@@ -6,7 +6,7 @@ class CustomTextFormFiled extends StatelessWidget {
     super.key,
     required this.label,
     this.prefixIcon,
-    this.suffixIcon, this.keyboardType=TextInputType.text, this.secure=false,this.validator, this.controller,
+    this.suffixIcon, this.keyboardType=TextInputType.text, this.secure=false,this.validator, this.controller, this.maxLine=1,
   });
 
   final String label;
@@ -16,12 +16,15 @@ class CustomTextFormFiled extends StatelessWidget {
   final bool secure;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
+  final int maxLine;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.sp),
       child: TextFormField(
+        textAlign: TextAlign.start,
+        maxLines: maxLine,
         controller: controller,
         validator: validator,
         obscureText: secure,

@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:evently/core/resources/assets_manager.dart';
 import 'package:evently/core/resources/routes_manager.dart';
 import 'package:evently/core/utils/validation.dart';
 import 'package:evently/core/widget/custom_elevated_button.dart';
 import 'package:evently/core/widget/custom_text_button.dart';
 import 'package:evently/core/widget/custom_text_form_filed.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -41,7 +44,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Register")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.register),elevation: 0,),
       body: Form(
         key: formKey,
         child: SingleChildScrollView(
@@ -54,14 +57,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(height: 24.h),
                 CustomTextFormFiled(
                   controller: nameController,
-                  label: "Name",
+                  label: AppLocalizations.of(context)!.name,
                   prefixIcon: Icons.person,
                   validator: (input) {
                     if(input==null||input.trim().isEmpty){
-                      return "Name is Required";
+                      return AppLocalizations.of(context)!.name_required;
                     }
                     if(input.length<5){
-                      return "Sorry,Name should be at least 6 char";
+                      return AppLocalizations.of(context)!.name_min;
                     }
                     return null;
                   },
@@ -69,14 +72,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 CustomTextFormFiled(
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
-                  label: "E-mail",
+                  label: AppLocalizations.of(context)!.email,
                   prefixIcon: Icons.email,
                   validator: (input) {
                     if(input==null||input.trim().isEmpty){
-                      return "E-mail is Required";
+                      return AppLocalizations.of(context)!.email_required;
                     }
                     if(!Validation.isValidateEmail(input)){
-                      return "E-mail is not validate";
+                      return AppLocalizations.of(context)!.email_invalid;
                     }
                     return null;
                   },
@@ -85,15 +88,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   controller: passwordController,
                   validator: (input) {
                     if(input==null||input.trim().isEmpty){
-                      return "Password is Required";
+                      return AppLocalizations.of(context)!.password_required;
                     }
                     if(input.length<8){
-                      return "Sorry,Password should be at least 8 char";
+                      return AppLocalizations.of(context)!.password_min;
                     }
                     return null;
                   },
                   secure: secure,
-                  label: "Password",
+                  label: AppLocalizations.of(context)!.password,
                   prefixIcon: Icons.lock,
                   suffixIcon: IconButton(
                     onPressed: () {
@@ -105,7 +108,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 CustomElevatedButton(
                   onPress: _createAccount,
-                  text: "Create Account",
+                  text: AppLocalizations.of(context)!.create_account,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.sp),
@@ -113,9 +116,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Already Have Account ? ",
+                        AppLocalizations.of(context)!.already_have_account,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
+                      SizedBox(width: 2.w,),
                       CustomTextButton(
                         onPress: () {
                           Navigator.pushReplacementNamed(
@@ -123,7 +127,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             RoutesManager.login,
                           );
                         },
-                        text: "Login",
+                        text: AppLocalizations.of(context)!.login,
                       ),
                     ],
                   ),
@@ -138,7 +142,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void _createAccount() {
     if (formKey.currentState?.validate() ?? false) {
-      print("Now create account...");
+      log("Now create account...");
     }
   }
 
