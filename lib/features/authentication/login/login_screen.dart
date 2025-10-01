@@ -1,7 +1,9 @@
 import 'package:evently/core/resources/colors_manager.dart';
 import 'package:evently/core/resources/routes_manager.dart';
+import 'package:evently/core/utils/ui_utils.dart';
 import 'package:evently/core/widget/custom_elevated_button.dart';
 import 'package:evently/core/widget/custom_text_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,20 +22,21 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   late bool secure = true;
-  var formKey=GlobalKey<FormState>();
+  var formKey = GlobalKey<FormState>();
   late TextEditingController emailController;
   late TextEditingController passwordController;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    emailController=TextEditingController();
-    passwordController=TextEditingController();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
-
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -51,7 +54,11 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(height: 40.h),
-                Image.asset(ImageAssets.eventlyLogo, height: 186.h, width: 136.w),
+                Image.asset(
+                  ImageAssets.eventlyLogo,
+                  height: 186.h,
+                  width: 136.w,
+                ),
                 SizedBox(height: 24.h),
                 CustomTextFormFiled(
                   controller: emailController,
@@ -59,10 +66,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   label: AppLocalizations.of(context)!.email,
                   prefixIcon: Icons.email,
                   validator: (input) {
-                    if(input==null||input.trim().isEmpty){
+                    if (input == null || input.trim().isEmpty) {
                       return AppLocalizations.of(context)!.email_required;
                     }
-                    if(!Validation.isValidateEmail(input)){
+                    if (!Validation.isValidateEmail(input)) {
                       return AppLocalizations.of(context)!.email_invalid;
                     }
                     return null;
@@ -78,13 +85,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       secure = !secure;
                       setState(() {});
                     },
-                    icon: Icon(secure?Icons.visibility_off:Icons.visibility),
+                    icon: Icon(
+                      secure ? Icons.visibility_off : Icons.visibility,
+                    ),
                   ),
                   validator: (input) {
-                    if(input==null||input.trim().isEmpty){
+                    if (input == null || input.trim().isEmpty) {
                       return AppLocalizations.of(context)!.password_required;
                     }
-                    if(input.length<8){
+                    if (input.length < 8) {
                       return AppLocalizations.of(context)!.password_min;
                     }
                     return null;
@@ -95,7 +104,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      CustomTextButton(onPress: () {}, text: AppLocalizations.of(context)!.forget_password),
+                      CustomTextButton(
+                        onPress: () {},
+                        text: AppLocalizations.of(context)!.forget_password,
+                      ),
                     ],
                   ),
                 ),
@@ -112,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         AppLocalizations.of(context)!.do_not_have_account,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
-                      SizedBox(width: 2.w,),
+                      SizedBox(width: 2.w),
                       CustomTextButton(
                         onPress: () {
                           Navigator.pushReplacementNamed(
@@ -188,11 +200,23 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-
   }
-  void _login() {
+
+  Future<void> _login() async {
     if (formKey.currentState?.validate() ?? false) {
-      Navigator.pushReplacementNamed(context, RoutesManager.mainLayout);
+      try {
+        UiUtils.showLoadingDialog(context);
+        final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: emailController.text,
+            password: passwordController.text
+        );
+        UiUtils.hideDialog(context);
+        Navigator.pushReplacementNamed(context, RoutesManager.mainLayout);
+      } on FirebaseAuthException catch (e) {
+        UiUtils.hideDialog(context);
+        UiUtils.showMassage(context, 'E-mail or Password is InCorrect');
+      }
+
     }
   }
 }

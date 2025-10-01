@@ -27,7 +27,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get create_account => 'Create Account';
 
   @override
-  String get already_have_account => 'Already Have Account';
+  String get already_have_account => 'Already Have Account ?';
 
   @override
   String get forget_password => 'Forget Password?';

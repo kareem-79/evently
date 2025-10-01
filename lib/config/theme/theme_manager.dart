@@ -129,6 +129,9 @@ class ThemeManager {
       shape: const CircularNotchedRectangle(),
     ),
     cardTheme: CardThemeData(color: Colors.white),
+    dialogTheme: DialogThemeData(
+      backgroundColor: ColorsManager.whiteBlue
+    )
   );
   static final ThemeData dark = ThemeData(
     primaryColor: ColorsManager.darkBlue,
@@ -256,5 +259,9 @@ class ThemeManager {
       shape: const CircularNotchedRectangle(),
     ),
     cardTheme: CardThemeData(color: ColorsManager.darkBlue),
+    dialogTheme: DialogThemeData(
+      backgroundColor: ColorsManager.darkBlue,
+      barrierColor: ColorsManager.darkBlue
+    )
   );
 }

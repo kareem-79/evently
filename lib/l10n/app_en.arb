@@ -5,7 +5,7 @@
   "email": "E_mail",
   "password": "Password",
   "create_account": "Create Account",
-  "already_have_account": "Already Have Account",
+  "already_have_account": "Already Have Account ?",
   "forget_password": "Forget Password?",
   "do_not_have_account": " Don’t Have Account",
   "or": "Or",
