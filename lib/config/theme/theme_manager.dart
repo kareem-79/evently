@@ -7,6 +7,8 @@ class ThemeManager {
   static final ThemeData light = ThemeData(
     primaryColor: ColorsManager.blue,
     shadowColor: ColorsManager.whiteBlue,
+    secondaryHeaderColor: ColorsManager.blue,
+    focusColor: ColorsManager.black,
     useMaterial3: false,
     iconTheme: IconThemeData(color: ColorsManager.black),
     appBarTheme: AppBarTheme(
@@ -136,6 +138,8 @@ class ThemeManager {
   static final ThemeData dark = ThemeData(
     primaryColor: ColorsManager.darkBlue,
     shadowColor: ColorsManager.darkBlue,
+    secondaryHeaderColor: ColorsManager.blue,
+    focusColor: ColorsManager.blue,
     useMaterial3: false,
     iconTheme: IconThemeData(color: ColorsManager.ofWhite),
     appBarTheme: AppBarTheme(

@@ -37,4 +37,12 @@ class PrefsManager {
     }
     return null;
   }
+  static Future<void> saveEntering() async {
+    SharedPreferences prefs=await SharedPreferences.getInstance();
+    prefs.setBool("isFirst", true);
+  }
+  static Future<bool>checkEntering()async{
+    SharedPreferences prefs=await SharedPreferences.getInstance();
+    return prefs.getBool("isFirst")??false;
+  }
 }

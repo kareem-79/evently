@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../core/prefs_manager/prefs_manager.dart';
 import '../../../core/resources/assets_manager.dart';
 import '../../../core/utils/validation.dart';
 import '../../../core/widget/custom_text_form_filed.dart';
@@ -211,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
             password: passwordController.text
         );
         UiUtils.hideDialog(context);
-        Navigator.pushReplacementNamed(context, RoutesManager.mainLayout);
+        _navigate();
       } on FirebaseAuthException catch (e) {
         UiUtils.hideDialog(context);
         UiUtils.showMassage(context, 'E-mail or Password is InCorrect');
@@ -219,4 +220,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
     }
   }
+  _navigate() async {
+    bool checkEntering=await PrefsManager.checkEntering();
+      if(checkEntering){
+        Navigator.pushReplacementNamed(context, RoutesManager.mainLayout);
+      }else{
+        PrefsManager.saveEntering();
+        Navigator.pushReplacementNamed(context, RoutesManager.onBoarding);
+  }}
 }
