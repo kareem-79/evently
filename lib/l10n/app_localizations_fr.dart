@@ -1,0 +1,194 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for French (`fr`).
+class AppLocalizationsFr extends AppLocalizations {
+  AppLocalizationsFr([String locale = 'fr']) : super(locale);
+
+  @override
+  String get register => 'S\'inscrire';
+
+  @override
+  String get en => 'Fr';
+
+  @override
+  String get name => 'Nom';
+
+  @override
+  String get email => 'E-mail';
+
+  @override
+  String get password => 'Mot de passe';
+
+  @override
+  String get create_account => 'Créer un compte';
+
+  @override
+  String get already_have_account => 'Vous avez déjà un compte ?';
+
+  @override
+  String get forget_password => 'Mot de passe oublié ?';
+
+  @override
+  String get do_not_have_account => 'Vous n\'avez pas de compte ?';
+
+  @override
+  String get or => 'Ou';
+
+  @override
+  String get login_with_google => 'Se connecter avec Google';
+
+  @override
+  String get reset_password => 'Réinitialiser le mot de passe';
+
+  @override
+  String get welcome => 'Bon retour ✨';
+
+  @override
+  String get home => 'Accueil';
+
+  @override
+  String get map => 'Carte';
+
+  @override
+  String get favorite => 'Favoris';
+
+  @override
+  String get profile => 'Profil';
+
+  @override
+  String get all => 'Tous';
+
+  @override
+  String get sports => 'Sports';
+
+  @override
+  String get birthday => 'Anniversaire';
+
+  @override
+  String get meeting => 'Réunion';
+
+  @override
+  String get gaming => 'Jeux';
+
+  @override
+  String get eating => 'Repas';
+
+  @override
+  String get holiday => 'Vacances';
+
+  @override
+  String get exhibition => 'Exposition';
+
+  @override
+  String get work_shop => 'Atelier';
+
+  @override
+  String get book_club => 'Club de lecture';
+
+  @override
+  String get search_for_event => 'Rechercher un événement';
+
+  @override
+  String get theme => 'Thème';
+
+  @override
+  String get light => 'Clair';
+
+  @override
+  String get dark => 'Sombre';
+
+  @override
+  String get language => 'Langue';
+
+  @override
+  String get english => 'Anglais';
+
+  @override
+  String get spanish => 'Espagnol';
+
+  @override
+  String get arabic => 'Arabe';
+
+  @override
+  String get french => 'Français';
+
+  @override
+  String get japanese => 'Japonais';
+
+  @override
+  String get russian => 'Russe';
+
+  @override
+  String get chinese => 'Chinois';
+
+  @override
+  String get name_required => 'Le nom est obligatoire';
+
+  @override
+  String get name_min => 'Le nom doit comporter au moins 6 caractères';
+
+  @override
+  String get email_required => 'L\'e-mail est obligatoire';
+
+  @override
+  String get email_invalid => 'E-mail non valide';
+
+  @override
+  String get password_required => 'Le mot de passe est obligatoire';
+
+  @override
+  String get password_min =>
+      'Le mot de passe doit comporter au moins 8 caractères';
+
+  @override
+  String get login => 'Connexion';
+
+  @override
+  String get title => 'Titre';
+
+  @override
+  String get event_title => 'Titre de l\'événement';
+
+  @override
+  String get title_required => 'Le titre est obligatoire';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get event_description => 'Description de l\'événement';
+
+  @override
+  String get description_required => 'La description est obligatoire';
+
+  @override
+  String get event_date => 'Date de l\'événement';
+
+  @override
+  String get choose_date => 'Choisir une date';
+
+  @override
+  String get event_time => 'Heure de l\'événement';
+
+  @override
+  String get choose_time => 'Choisir l\'heure';
+
+  @override
+  String get location => 'Lieu';
+
+  @override
+  String get choose_event_location => 'Choisir le lieu de l\'événement';
+
+  @override
+  String get add_event => 'Ajouter un événement';
+
+  @override
+  String get create_event => 'Créer un événement';
+
+  @override
+  String get logout => 'Déconnexion';
+}

@@ -1,14 +1,17 @@
+import 'package:evently/core/prefs_manager/prefs_manager.dart';
+import 'package:evently/core/resources/assets_manager.dart';
 import 'package:evently/core/resources/colors_manager.dart';
 import 'package:evently/core/resources/routes_manager.dart';
+import 'package:evently/core/utils/ui_utils.dart';
+import 'package:evently/core/utils/validation.dart';
 import 'package:evently/core/widget/custom_elevated_button.dart';
 import 'package:evently/core/widget/custom_text_button.dart';
+import 'package:evently/core/widget/custom_text_form_filed.dart';
+import 'package:evently/l10n/app_localizations.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../../core/resources/assets_manager.dart';
-import '../../../core/utils/validation.dart';
-import '../../../core/widget/custom_text_form_filed.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -19,20 +22,21 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   late bool secure = true;
-  var formKey=GlobalKey<FormState>();
+  var formKey = GlobalKey<FormState>();
   late TextEditingController emailController;
   late TextEditingController passwordController;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    emailController=TextEditingController();
-    passwordController=TextEditingController();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
-
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -50,19 +54,23 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(height: 40.h),
-                Image.asset(ImageAssets.eventlyLogo, height: 186.h, width: 136.w),
+                Image.asset(
+                  ImageAssets.eventlyLogo,
+                  height: 186.h,
+                  width: 136.w,
+                ),
                 SizedBox(height: 24.h),
                 CustomTextFormFiled(
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
-                  label: "E-mail",
+                  label: AppLocalizations.of(context)!.email,
                   prefixIcon: Icons.email,
                   validator: (input) {
-                    if(input==null||input.trim().isEmpty){
-                      return "E-mail is Required";
+                    if (input == null || input.trim().isEmpty) {
+                      return AppLocalizations.of(context)!.email_required;
                     }
-                    if(!Validation.isValidateEmail(input)){
-                      return "E-mail is not validate";
+                    if (!Validation.isValidateEmail(input)) {
+                      return AppLocalizations.of(context)!.email_invalid;
                     }
                     return null;
                   },
@@ -70,21 +78,23 @@ class _LoginScreenState extends State<LoginScreen> {
                 CustomTextFormFiled(
                   controller: passwordController,
                   secure: secure,
-                  label: "Password",
+                  label: AppLocalizations.of(context)!.password,
                   prefixIcon: Icons.lock,
                   suffixIcon: IconButton(
                     onPressed: () {
                       secure = !secure;
                       setState(() {});
                     },
-                    icon: Icon(secure?Icons.visibility_off:Icons.visibility),
+                    icon: Icon(
+                      secure ? Icons.visibility_off : Icons.visibility,
+                    ),
                   ),
                   validator: (input) {
-                    if(input==null||input.trim().isEmpty){
-                      return "Password is Required";
+                    if (input == null || input.trim().isEmpty) {
+                      return AppLocalizations.of(context)!.password_required;
                     }
-                    if(input.length<8){
-                      return "Sorry,Password should be at least 8 char";
+                    if (input.length < 8) {
+                      return AppLocalizations.of(context)!.password_min;
                     }
                     return null;
                   },
@@ -94,13 +104,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      CustomTextButton(onPress: () {}, text: "Forget Password ?"),
+                      CustomTextButton(
+                        onPress: () {},
+                        text: AppLocalizations.of(context)!.forget_password,
+                      ),
                     ],
                   ),
                 ),
                 CustomElevatedButton(
                   onPress: _login,
-                  text: "Login",
+                  text: AppLocalizations.of(context)!.login,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.sp),
@@ -108,9 +121,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Don’t Have Account ?",
+                        AppLocalizations.of(context)!.do_not_have_account,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
+                      SizedBox(width: 2.w),
                       CustomTextButton(
                         onPress: () {
                           Navigator.pushReplacementNamed(
@@ -118,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             RoutesManager.register,
                           );
                         },
-                        text: "Create Account",
+                        text: AppLocalizations.of(context)!.create_account,
                       ),
                     ],
                   ),
@@ -135,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     Text(
-                      "Or",
+                      AppLocalizations.of(context)!.or,
                       style: GoogleFonts.inter(
                         fontSize: 16.sp,
                         color: ColorsManager.blue,
@@ -160,7 +174,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     side: BorderSide(color: ColorsManager.blue),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                  },
                   child: Padding(
                     padding: EdgeInsets.all(12.0.sp),
                     child: Row(
@@ -169,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Image.asset(ImageAssets.googleLogo),
                         SizedBox(width: 10.w),
                         Text(
-                          "Login With Google",
+                          AppLocalizations.of(context)!.login_with_google,
                           style: GoogleFonts.inter(
                             fontSize: 20.sp,
                             fontWeight: FontWeight.bold,
@@ -186,12 +201,34 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-
   }
-  void _login() {
+
+  Future<void> _login() async {
     if (formKey.currentState?.validate() ?? false) {
-      print("Now login...");
+      try {
+        UiUtils.showLoadingDialog(context);
+        final credential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+              email: emailController.text,
+              password: passwordController.text,
+            );
+        UiUtils.hideDialog(context);
+        _navigate();
+      } on FirebaseAuthException catch (e) {
+        UiUtils.hideDialog(context);
+        UiUtils.showMassage(context, 'E-mail or Password is InCorrect');
+      }
+    }
+  }
+
+  _navigate() async {
+    bool hasEnteredBefore = await PrefsManager.checkEntering();
+    if (!hasEnteredBefore) {
+      await PrefsManager.saveEntering();
+      Navigator.pushReplacementNamed(context, RoutesManager.onBoarding);
+    } else {
       Navigator.pushReplacementNamed(context, RoutesManager.mainLayout);
     }
   }
-}
+  }
+
