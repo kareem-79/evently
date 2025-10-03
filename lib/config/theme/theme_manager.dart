@@ -265,7 +265,6 @@ class ThemeManager {
     cardTheme: CardThemeData(color: ColorsManager.darkBlue),
     dialogTheme: DialogThemeData(
       backgroundColor: ColorsManager.darkBlue,
-      barrierColor: ColorsManager.darkBlue
     )
   );
 }

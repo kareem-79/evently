@@ -140,7 +140,7 @@ class _OnBoardingState extends State<OnBoarding> {
               text1: "Effortless Event Planning",
               text2:
                   "Take the hassle out of organizing events with our all-in-one planning tools. From setting up invites and managing RSVPs to scheduling reminders and coordinating details, we’ve got you covered. Plan with ease and focus on what matters – creating an unforgettable experience for you and your guests.",
-              image: ImageAssets.onBoarding2,
+              image: ImageAssets.onBoarding3,
             ),
           ),
           decoration: PageDecoration(
@@ -155,7 +155,7 @@ class _OnBoardingState extends State<OnBoarding> {
               text1: "Connect with Friends & Share Moments",
               text2:
                   "Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories.",
-              image: ImageAssets.onBoarding2,
+              image: ImageAssets.onBoarding4,
             ),
           ),
           decoration: PageDecoration(

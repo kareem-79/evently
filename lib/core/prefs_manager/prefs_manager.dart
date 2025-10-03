@@ -10,14 +10,14 @@ class PrefsManager {
   }
 
   static void saveTheme(ThemeMode themeMode) {
-    String theme = themeMode == ThemeMode.light ? "Light" : "Dark";
+    String theme = themeMode == ThemeMode.light ? ChachConstant.light : ChachConstant.dark;
     prefs.setString(ChachConstant.themeKey, theme);
   }
 
   static ThemeMode? getSavedTheme() {
     String? savedTheme = prefs.getString(ChachConstant.themeKey);
     if (savedTheme != null) {
-      if (savedTheme == "Light") {
+      if (savedTheme == ChachConstant.light) {
         return ThemeMode.light;
       } else {
         return ThemeMode.dark;
@@ -38,11 +38,16 @@ class PrefsManager {
     return null;
   }
   static Future<void> saveEntering() async {
-    SharedPreferences prefs=await SharedPreferences.getInstance();
-    prefs.setBool("isFirst", true);
+    prefs.setBool(ChachConstant.isFirst, true);
   }
   static Future<bool>checkEntering()async{
-    SharedPreferences prefs=await SharedPreferences.getInstance();
-    return prefs.getBool("isFirst")??false;
+    return prefs.getBool(ChachConstant.isFirst)??false;
+  }
+  static Future<void> saveLoginStatus(bool loggedIn) async {
+    prefs.setBool(ChachConstant.isLoggedIn, loggedIn);
+  }
+
+  static Future<bool> isLoggedIn() async {
+    return prefs.getBool(ChachConstant.isLoggedIn) ?? false;
   }
 }

@@ -1,18 +1,17 @@
+import 'package:evently/core/prefs_manager/prefs_manager.dart';
+import 'package:evently/core/resources/assets_manager.dart';
 import 'package:evently/core/resources/colors_manager.dart';
 import 'package:evently/core/resources/routes_manager.dart';
 import 'package:evently/core/utils/ui_utils.dart';
+import 'package:evently/core/utils/validation.dart';
 import 'package:evently/core/widget/custom_elevated_button.dart';
 import 'package:evently/core/widget/custom_text_button.dart';
+import 'package:evently/core/widget/custom_text_form_filed.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../../core/prefs_manager/prefs_manager.dart';
-import '../../../core/resources/assets_manager.dart';
-import '../../../core/utils/validation.dart';
-import '../../../core/widget/custom_text_form_filed.dart';
-import '../../../l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -175,7 +174,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     side: BorderSide(color: ColorsManager.blue),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                  },
                   child: Padding(
                     padding: EdgeInsets.all(12.0.sp),
                     child: Row(
@@ -207,25 +207,28 @@ class _LoginScreenState extends State<LoginScreen> {
     if (formKey.currentState?.validate() ?? false) {
       try {
         UiUtils.showLoadingDialog(context);
-        final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-            email: emailController.text,
-            password: passwordController.text
-        );
+        final credential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+              email: emailController.text,
+              password: passwordController.text,
+            );
         UiUtils.hideDialog(context);
         _navigate();
       } on FirebaseAuthException catch (e) {
         UiUtils.hideDialog(context);
         UiUtils.showMassage(context, 'E-mail or Password is InCorrect');
       }
-
     }
   }
+
   _navigate() async {
-    bool checkEntering=await PrefsManager.checkEntering();
-      if(checkEntering){
-        Navigator.pushReplacementNamed(context, RoutesManager.mainLayout);
-      }else{
-        PrefsManager.saveEntering();
-        Navigator.pushReplacementNamed(context, RoutesManager.onBoarding);
-  }}
-}
+    bool hasEnteredBefore = await PrefsManager.checkEntering();
+    if (!hasEnteredBefore) {
+      await PrefsManager.saveEntering();
+      Navigator.pushReplacementNamed(context, RoutesManager.onBoarding);
+    } else {
+      Navigator.pushReplacementNamed(context, RoutesManager.mainLayout);
+    }
+  }
+  }
+

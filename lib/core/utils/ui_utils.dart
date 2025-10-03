@@ -7,7 +7,6 @@ class UiUtils {
     bool isDisable = false,
   }) {
     showDialog(
-      barrierColor: ColorsManager.darkBlue,
       barrierDismissible: isDisable,
       context: context,
       builder: (context) => PopScope(
@@ -32,7 +31,6 @@ class UiUtils {
 
   static void showMassage(BuildContext context, String massage) {
     showDialog(
-      barrierColor: ColorsManager.darkBlue,
       context: context,
       builder: (context) => AlertDialog(
         elevation: 6,
