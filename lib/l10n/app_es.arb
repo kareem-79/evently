@@ -59,5 +59,22 @@
   "choose_event_location": "Elige la ubicación del evento",
   "add_event": "Agregar evento",
   "create_event": "Crear evento",
-  "logout": "Cerrar sesión"
+  "logout": "Cerrar sesión",
+  "failed_register": "Error al registrarse.",
+  "account_exists": "La cuenta ya existe para ese correo electrónico.",
+  "weak_password": "La contraseña proporcionada es demasiado débil.",
+  "failed_login": "Error al iniciar sesión.",
+  "incorrect_credentials": "El correo electrónico o la contraseña son incorrectos.",
+  "personalize_title": "Personaliza tu experiencia",
+  "personalize_description": "Elige tu tema y idioma preferidos para comenzar con una experiencia cómoda y personalizada que se adapte a tu estilo.",
+
+  "find_events_title": "Encuentra eventos que te inspiren",
+  "find_events_description": "Sumérgete en un mundo de eventos creados para adaptarse a tus intereses únicos. Ya sea música en vivo, talleres de arte, redes profesionales o nuevas experiencias, tenemos algo para todos. Nuestras recomendaciones seleccionadas te ayudarán a explorar, conectar y aprovechar cada oportunidad a tu alrededor.",
+
+  "event_planning_title": "Planificación de eventos sin esfuerzo",
+  "event_planning_description": "Elimina las complicaciones de organizar eventos con nuestras herramientas todo en uno. Desde configurar invitaciones y gestionar confirmaciones hasta programar recordatorios y coordinar detalles, lo tenemos cubierto. Planifica con facilidad y céntrate en lo importante: crear una experiencia inolvidable para ti y tus invitados.",
+
+  "connect_friends_title": "Conéctate con amigos y comparte momentos",
+  "connect_friends_description": "Haz que cada evento sea memorable compartiendo la experiencia con otros. Nuestra plataforma te permite invitar a tus amigos, mantenerlos informados y celebrar juntos. Captura y comparte la emoción para revivir los mejores momentos y atesorar los recuerdos.",
+  "finish": "Finalizar"
 }

@@ -99,7 +99,7 @@ class ProfileTab extends StatelessWidget {
             configProvider.changeAppLanguage(_mapLanguageToCode(context, newLanguage!));
           },
         ),
-        const Spacer(flex: 6),
+        const Spacer(flex: 9),
         Padding(
           padding: EdgeInsets.all(10.0.sp),
           child: ElevatedButton(
@@ -120,7 +120,7 @@ class ProfileTab extends StatelessWidget {
             ),
           ),
         ),
-        const Spacer(flex: 4),
+        const Spacer(flex: 1),
       ],
     );
   }

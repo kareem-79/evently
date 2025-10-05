@@ -6,7 +6,12 @@ class CustomTextFormFiled extends StatelessWidget {
     super.key,
     required this.label,
     this.prefixIcon,
-    this.suffixIcon, this.keyboardType=TextInputType.text, this.secure=false,this.validator, this.controller, this.maxLine=1,
+    this.suffixIcon,
+    this.keyboardType = TextInputType.text,
+    this.secure = false,
+    this.validator,
+    this.controller,
+    this.maxLine = 1,
   });
 
   final String label;

@@ -1,5 +1,6 @@
 import 'package:evently/core/resources/assets_manager.dart';
 import 'package:evently/features/on_boarding/page_widget.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/provider/config_provider.dart';
 import 'package:evently/features/on_boarding/title_widget.dart';
 import 'package:flutter/material.dart';
@@ -48,55 +49,59 @@ class _OnBoardingState extends State<OnBoarding> {
                 SizedBox(height: 20.h),
 
                 Text(
-                  "Personalize Your Experience",
+                  AppLocalizations.of(context)!.personalize_title,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
 
                 SizedBox(height: 20.h),
                 Text(
-                  "Choose your preferred theme and language to get started with a comfortable, tailored experience that suits your style.",
+                  AppLocalizations.of(context)!.personalize_description,
                   style: Theme.of(context).textTheme.labelSmall,
                 ),
-
                 SizedBox(height: 20.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(AppLocalizations.of(context)!.language,
+                        style: Theme.of(context).textTheme.titleMedium),
+                    ToggleSwitch(
+                      curve:Curves.easeOutQuart ,
+                      animate: true,
+                      initialLabelIndex:
+                      configProvider.appLanguageCode == "ar" ? 1 : 0,
+                      totalSwitches: 2,
+                      customWidgets: [
+                        Image.asset(ImageAssets.lr, width: 30),
+                        Image.asset(ImageAssets.eg, width: 30), ],
+                      activeBgColor: [Theme.of(context).secondaryHeaderColor],
+                      inactiveBgColor: Theme.of(context).shadowColor,
+                      onToggle: (index) {
+                        if (index == 0) {
+                          configProvider.changeAppLanguage("en");
+                        } else {
+                          configProvider.changeAppLanguage("ar");
+                        }
+                        setState(() {
 
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Text("Language",
-                //         style: Theme.of(context).textTheme.titleMedium),
-                //     ToggleSwitch(
-                //       initialLabelIndex:
-                //       configProvider.appLanguageCode == "ar" ? 1 : 0,
-                //       totalSwitches: 2,
-                //       customWidgets: [
-                //         Image.asset(ImageAssets.lr, width: 30),
-                //         Image.asset(ImageAssets.eg, width: 30), ],
-                //       activeBgColor: [Theme.of(context).secondaryHeaderColor],
-                //       inactiveBgColor: Theme.of(context).shadowColor,
-                //       onToggle: (index) {
-                //         if (index == 0) {
-                //           configProvider.changeAppLanguage("en");
-                //         } else {
-                //           configProvider.changeAppLanguage("ar");
-                //         }
-                //       },
-                //     ),
-                //   ],
-                // ),
-                SizedBox(height: 50.h),
-
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Theme",
+                      AppLocalizations.of(context)!.theme,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     ToggleSwitch(
+                      curve:Curves.easeOutQuart ,
+                      animate: true,
                       initialLabelIndex: configProvider.isDarkEnable ? 1 : 0,
                       totalSwitches: 2,
-                      labels: const ["Light", "Dark"],
+                      labels:  [AppLocalizations.of(context)!.light, AppLocalizations.of(context)!.dark],
                       activeBgColor: [Theme.of(context).secondaryHeaderColor],
                       inactiveBgColor: Theme.of(context).shadowColor,
                       inactiveFgColor: Theme.of(context).focusColor,
@@ -122,9 +127,9 @@ class _OnBoardingState extends State<OnBoarding> {
           bodyWidget: Padding(
             padding: EdgeInsets.all(12.0.sp),
             child: PageWidget(
-              text1: "Find Events That Inspire You",
+              text1: AppLocalizations.of(context)!.find_events_title,
               text2:
-                  "Dive into a world of events crafted to fit your unique interests. Whether you're into live music, art workshops, professional networking, or simply discovering new experiences, we have something for everyone. Our curated recommendations will help you explore, connect, and make the most of every opportunity around you.",
+              AppLocalizations.of(context)!.find_events_description,
               image: ImageAssets.onBoarding2,
             ),
           ),
@@ -137,9 +142,9 @@ class _OnBoardingState extends State<OnBoarding> {
           bodyWidget: Padding(
             padding: EdgeInsets.all(12.0.sp),
             child: PageWidget(
-              text1: "Effortless Event Planning",
+              text1: AppLocalizations.of(context)!.event_planning_title,
               text2:
-                  "Take the hassle out of organizing events with our all-in-one planning tools. From setting up invites and managing RSVPs to scheduling reminders and coordinating details, we’ve got you covered. Plan with ease and focus on what matters – creating an unforgettable experience for you and your guests.",
+              AppLocalizations.of(context)!.event_planning_description,
               image: ImageAssets.onBoarding3,
             ),
           ),
@@ -152,9 +157,9 @@ class _OnBoardingState extends State<OnBoarding> {
           bodyWidget: Padding(
             padding: EdgeInsets.all(12.0.sp),
             child: PageWidget(
-              text1: "Connect with Friends & Share Moments",
+              text1: AppLocalizations.of(context)!.connect_friends_title,
               text2:
-                  "Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories.",
+              AppLocalizations.of(context)!.connect_friends_description,
               image: ImageAssets.onBoarding4,
             ),
           ),
@@ -173,7 +178,7 @@ class _OnBoardingState extends State<OnBoarding> {
         color: Theme.of(context).focusColor,
       ),
       done: Text(
-        "Finish",
+        AppLocalizations.of(context)!.finish,
         style: TextStyle(color: Theme.of(context).secondaryHeaderColor),
       ),
       dotsDecorator: DotsDecorator(

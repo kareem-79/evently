@@ -1,7 +1,7 @@
 import 'package:evently/core/extension/date_time_extension.dart';
 import 'package:evently/core/resources/assets_manager.dart';
 import 'package:evently/core/resources/colors_manager.dart';
-import 'package:evently/core/widget/event_model.dart';
+import 'package:evently/model/event_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';

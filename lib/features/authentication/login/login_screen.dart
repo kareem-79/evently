@@ -1,12 +1,14 @@
 import 'package:evently/core/prefs_manager/prefs_manager.dart';
 import 'package:evently/core/resources/assets_manager.dart';
 import 'package:evently/core/resources/colors_manager.dart';
+import 'package:evently/core/resources/constant.dart';
 import 'package:evently/core/resources/routes_manager.dart';
 import 'package:evently/core/utils/ui_utils.dart';
 import 'package:evently/core/utils/validation.dart';
 import 'package:evently/core/widget/custom_elevated_button.dart';
 import 'package:evently/core/widget/custom_text_button.dart';
 import 'package:evently/core/widget/custom_text_form_filed.dart';
+import 'package:evently/firebase/firebase_service.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -207,16 +209,15 @@ class _LoginScreenState extends State<LoginScreen> {
     if (formKey.currentState?.validate() ?? false) {
       try {
         UiUtils.showLoadingDialog(context);
-        final credential = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(
-              email: emailController.text,
-              password: passwordController.text,
-            );
+        await FirebaseService.login(emailController.text, passwordController.text);
         UiUtils.hideDialog(context);
         _navigate();
       } on FirebaseAuthException catch (e) {
         UiUtils.hideDialog(context);
-        UiUtils.showMassage(context, 'E-mail or Password is InCorrect');
+        UiUtils.showMassage(context, AppLocalizations.of(context)!.incorrect_credentials);
+      }catch(e){
+        UiUtils.hideDialog(context);
+        UiUtils.showMassage(context, AppLocalizations.of(context)!.failed_login);
       }
     }
   }

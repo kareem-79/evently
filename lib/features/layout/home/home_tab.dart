@@ -2,7 +2,7 @@ import 'package:evently/core/prefs_manager/prefs_manager.dart';
 import 'package:evently/core/resources/colors_manager.dart';
 import 'package:evently/core/widget/custom_tap_bar.dart';
 import 'package:evently/core/widget/event_item.dart';
-import 'package:evently/core/widget/event_model.dart';
+import 'package:evently/model/event_model.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/model/category_model.dart';
 import 'package:evently/provider/config_provider.dart';

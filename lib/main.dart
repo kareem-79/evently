@@ -2,6 +2,7 @@ import 'package:evently/config/theme/theme_manager.dart';
 import 'package:evently/core/prefs_manager/prefs_manager.dart';
 import 'package:evently/core/resources/routes_manager.dart';
 import 'package:evently/provider/config_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -12,9 +13,7 @@ import 'l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await PrefsManager.init();
   final configProvider = ConfigProvider();
   await configProvider.loadSavedSettings();
@@ -39,7 +38,9 @@ class Evently extends StatelessWidget {
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RoutesManager.getRoute,
-        initialRoute: RoutesManager.login,
+        initialRoute: FirebaseAuth.instance.currentUser == null
+            ? RoutesManager.login
+            : RoutesManager.mainLayout,
         theme: ThemeManager.light,
         darkTheme: ThemeManager.dark,
         themeMode: configProvider.currentTheme,

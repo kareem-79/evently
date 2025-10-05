@@ -190,4 +190,49 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get logout => '退出';
+
+  @override
+  String get failed_register => '注册失败。';
+
+  @override
+  String get account_exists => '该邮箱的账户已存在。';
+
+  @override
+  String get weak_password => '提供的密码太弱。';
+
+  @override
+  String get failed_login => '登录失败。';
+
+  @override
+  String get incorrect_credentials => '电子邮件或密码不正确。';
+
+  @override
+  String get personalize_title => '个性化您的体验';
+
+  @override
+  String get personalize_description => '选择您喜欢的主题和语言，以开始符合您风格的舒适个性化体验。';
+
+  @override
+  String get find_events_title => '发现激发你灵感的活动';
+
+  @override
+  String get find_events_description =>
+      '沉浸在为你的独特兴趣量身打造的活动世界中。无论你喜欢现场音乐、艺术工作坊、专业社交，还是探索新的体验，我们都能满足你。我们精心推荐的活动将帮助你探索、连接并充分利用身边的每一个机会。';
+
+  @override
+  String get event_planning_title => '轻松的活动策划';
+
+  @override
+  String get event_planning_description =>
+      '使用我们的一体化工具，让活动组织变得简单。从设置邀请、管理回复到安排提醒和协调细节，我们都为你搞定。轻松规划，专注于最重要的事——为你和你的宾客创造难忘的体验。';
+
+  @override
+  String get connect_friends_title => '与朋友联系并分享时刻';
+
+  @override
+  String get connect_friends_description =>
+      '通过与他人分享体验，让每个活动都变得难忘。我们的平台让你可以邀请朋友、保持联系并共同庆祝。捕捉并分享精彩时刻，与网络中的人一起重温和珍藏回忆。';
+
+  @override
+  String get finish => '完成';
 }

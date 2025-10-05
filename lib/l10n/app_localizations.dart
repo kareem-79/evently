@@ -473,6 +473,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Logout'**
   String get logout;
+
+  /// No description provided for @failed_register.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to Register.'**
+  String get failed_register;
+
+  /// No description provided for @account_exists.
+  ///
+  /// In en, this message translates to:
+  /// **'The account already exists for that email.'**
+  String get account_exists;
+
+  /// No description provided for @weak_password.
+  ///
+  /// In en, this message translates to:
+  /// **'The password provided is too weak.'**
+  String get weak_password;
+
+  /// No description provided for @failed_login.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to Login.'**
+  String get failed_login;
+
+  /// No description provided for @incorrect_credentials.
+  ///
+  /// In en, this message translates to:
+  /// **'E-mail or Password is Incorrect.'**
+  String get incorrect_credentials;
+
+  /// No description provided for @personalize_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Personalize Your Experience'**
+  String get personalize_title;
+
+  /// No description provided for @personalize_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your preferred theme and language to get started with a comfortable, tailored experience that suits your style.'**
+  String get personalize_description;
+
+  /// No description provided for @find_events_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Find Events That Inspire You'**
+  String get find_events_title;
+
+  /// No description provided for @find_events_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Dive into a world of events crafted to fit your unique interests. Whether you\'re into live music, art workshops, professional networking, or simply discovering new experiences, we have something for everyone. Our curated recommendations will help you explore, connect, and make the most of every opportunity around you.'**
+  String get find_events_description;
+
+  /// No description provided for @event_planning_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Effortless Event Planning'**
+  String get event_planning_title;
+
+  /// No description provided for @event_planning_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Take the hassle out of organizing events with our all-in-one planning tools. From setting up invites and managing RSVPs to scheduling reminders and coordinating details, we’ve got you covered. Plan with ease and focus on what matters – creating an unforgettable experience for you and your guests.'**
+  String get event_planning_description;
+
+  /// No description provided for @connect_friends_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect with Friends & Share Moments'**
+  String get connect_friends_title;
+
+  /// No description provided for @connect_friends_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories.'**
+  String get connect_friends_description;
+
+  /// No description provided for @finish.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get finish;
 }
 
 class _AppLocalizationsDelegate

@@ -190,4 +190,51 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get logout => 'تسجيل الخروج';
+
+  @override
+  String get failed_register => 'فشل في التسجيل.';
+
+  @override
+  String get account_exists => 'الحساب موجود بالفعل لهذا البريد الإلكتروني.';
+
+  @override
+  String get weak_password => 'كلمة المرور المقدمة ضعيفة جدًا.';
+
+  @override
+  String get failed_login => 'فشل في تسجيل الدخول.';
+
+  @override
+  String get incorrect_credentials =>
+      'البريد الإلكتروني أو كلمة المرور غير صحيحة.';
+
+  @override
+  String get personalize_title => 'خصص تجربتك';
+
+  @override
+  String get personalize_description =>
+      'اختر السمة واللغة المفضلة لديك لبدء تجربة مريحة ومخصصة تناسب أسلوبك.';
+
+  @override
+  String get find_events_title => 'اكتشف فعاليات تلهمك';
+
+  @override
+  String get find_events_description =>
+      'انغمس في عالم من الفعاليات المصممة لتناسب اهتماماتك الفريدة. سواء كنت من محبي الموسيقى الحية، أو ورش الفنون، أو التواصل المهني، أو مجرد اكتشاف تجارب جديدة، لدينا ما يناسب الجميع. توصياتنا المختارة بعناية تساعدك على الاستكشاف والتواصل والاستفادة من كل فرصة حولك.';
+
+  @override
+  String get event_planning_title => 'تخطيط فعاليات بسهولة';
+
+  @override
+  String get event_planning_description =>
+      'تخلص من عناء تنظيم الفعاليات باستخدام أدوات التخطيط الشاملة لدينا. من إعداد الدعوات وإدارة الردود إلى جدولة التذكيرات وتنسيق التفاصيل، نحن نغطي كل ما تحتاجه. خطط بسهولة وركز على الأهم – إنشاء تجربة لا تُنسى لك ولضيوفك.';
+
+  @override
+  String get connect_friends_title => 'تواصل مع الأصدقاء وشارك اللحظات';
+
+  @override
+  String get connect_friends_description =>
+      'اجعل كل فعالية ذكرى مميزة من خلال مشاركتها مع الآخرين. منصتنا تتيح لك دعوة الأصدقاء، وإبقائهم على اطلاع، والاحتفال معًا. التقط وشارك اللحظات المميزة مع شبكتك لتعيش التجربة مجددًا وتحتفظ بالذكريات.';
+
+  @override
+  String get finish => 'إنهاء';
 }

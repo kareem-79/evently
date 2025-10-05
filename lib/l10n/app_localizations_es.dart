@@ -190,4 +190,53 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get logout => 'Cerrar sesión';
+
+  @override
+  String get failed_register => 'Error al registrarse.';
+
+  @override
+  String get account_exists =>
+      'La cuenta ya existe para ese correo electrónico.';
+
+  @override
+  String get weak_password => 'La contraseña proporcionada es demasiado débil.';
+
+  @override
+  String get failed_login => 'Error al iniciar sesión.';
+
+  @override
+  String get incorrect_credentials =>
+      'El correo electrónico o la contraseña son incorrectos.';
+
+  @override
+  String get personalize_title => 'Personaliza tu experiencia';
+
+  @override
+  String get personalize_description =>
+      'Elige tu tema y idioma preferidos para comenzar con una experiencia cómoda y personalizada que se adapte a tu estilo.';
+
+  @override
+  String get find_events_title => 'Encuentra eventos que te inspiren';
+
+  @override
+  String get find_events_description =>
+      'Sumérgete en un mundo de eventos creados para adaptarse a tus intereses únicos. Ya sea música en vivo, talleres de arte, redes profesionales o nuevas experiencias, tenemos algo para todos. Nuestras recomendaciones seleccionadas te ayudarán a explorar, conectar y aprovechar cada oportunidad a tu alrededor.';
+
+  @override
+  String get event_planning_title => 'Planificación de eventos sin esfuerzo';
+
+  @override
+  String get event_planning_description =>
+      'Elimina las complicaciones de organizar eventos con nuestras herramientas todo en uno. Desde configurar invitaciones y gestionar confirmaciones hasta programar recordatorios y coordinar detalles, lo tenemos cubierto. Planifica con facilidad y céntrate en lo importante: crear una experiencia inolvidable para ti y tus invitados.';
+
+  @override
+  String get connect_friends_title =>
+      'Conéctate con amigos y comparte momentos';
+
+  @override
+  String get connect_friends_description =>
+      'Haz que cada evento sea memorable compartiendo la experiencia con otros. Nuestra plataforma te permite invitar a tus amigos, mantenerlos informados y celebrar juntos. Captura y comparte la emoción para revivir los mejores momentos y atesorar los recuerdos.';
+
+  @override
+  String get finish => 'Finalizar';
 }

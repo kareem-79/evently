@@ -190,4 +190,50 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get logout => 'ログアウト';
+
+  @override
+  String get failed_register => '登録に失敗しました。';
+
+  @override
+  String get account_exists => 'このメールアドレスのアカウントは既に存在します。';
+
+  @override
+  String get weak_password => '入力されたパスワードが弱すぎます。';
+
+  @override
+  String get failed_login => 'ログインに失敗しました。';
+
+  @override
+  String get incorrect_credentials => 'メールアドレスまたはパスワードが正しくありません。';
+
+  @override
+  String get personalize_title => '体験をパーソナライズ';
+
+  @override
+  String get personalize_description =>
+      'お好みのテーマと言語を選んで、自分のスタイルに合った快適でカスタマイズされた体験を始めましょう。';
+
+  @override
+  String get find_events_title => 'あなたを刺激するイベントを見つけよう';
+
+  @override
+  String get find_events_description =>
+      'あなたの興味に合わせて作られたイベントの世界に飛び込もう。ライブ音楽、アートワークショップ、ビジネスネットワーキング、新しい体験の発見など、誰にでも楽しめるものがあります。厳選されたおすすめイベントで、探検し、つながり、あらゆるチャンスを最大限に活かしましょう。';
+
+  @override
+  String get event_planning_title => '簡単でスムーズなイベント企画';
+
+  @override
+  String get event_planning_description =>
+      'オールインワンのプランニングツールで、イベントの準備を簡単に。招待の作成、出欠管理、リマインダーの設定、詳細の調整まで、すべてをサポートします。ストレスなく計画し、あなたとゲストに忘れられない体験を作りましょう。';
+
+  @override
+  String get connect_friends_title => '友達とつながり、瞬間を共有しよう';
+
+  @override
+  String get connect_friends_description =>
+      '他の人と体験を共有して、すべてのイベントを特別な思い出にしましょう。友達を招待し、情報を共有し、一緒にお祝いできます。興奮をキャプチャして共有し、思い出を振り返って大切にしましょう。';
+
+  @override
+  String get finish => '完了';
 }

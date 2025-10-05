@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:evently/core/resources/assets_manager.dart';
 import 'package:evently/core/resources/routes_manager.dart';
 import 'package:evently/core/utils/ui_utils.dart';
@@ -6,7 +5,9 @@ import 'package:evently/core/utils/validation.dart';
 import 'package:evently/core/widget/custom_elevated_button.dart';
 import 'package:evently/core/widget/custom_text_button.dart';
 import 'package:evently/core/widget/custom_text_form_filed.dart';
+import 'package:evently/firebase/firebase_service.dart';
 import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -154,27 +155,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Future<void> _createAccount() async {
     if (formKey.currentState?.validate() ?? false) {
-      UiUtils.showLoadingDialog(context);
       try {
-        final credential = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(
-              email: emailController.text,
-              password: passwordController.text,
-            );
+        UiUtils.showLoadingDialog(context);
+        UserCredential credential = await FirebaseService.register(
+          emailController.text,
+          passwordController.text,
+        );
+        await FirebaseService.addUserToFirestore(
+          UserModel(
+            id: credential.user!.uid,
+            name: nameController.text,
+            email: emailController.text,
+          ),
+        );
         UiUtils.hideDialog(context);
         Navigator.pushReplacementNamed(context, RoutesManager.login);
       } on FirebaseAuthException catch (e) {
         UiUtils.hideDialog(context);
         if (e.code == 'weak-password') {
-          UiUtils.showMassage(context, 'The password provided is too weak.');
+          UiUtils.showMassage(
+            context,
+            AppLocalizations.of(context)!.weak_password,
+          );
         } else if (e.code == 'email-already-in-use') {
-          UiUtils.showMassage(context, 'The account already exists for that email.');
+          UiUtils.showMassage(
+            context,
+            AppLocalizations.of(context)!.account_exists,
+          );
         }
       } catch (e) {
         UiUtils.hideDialog(context);
-        UiUtils.showMassage(context, 'Failed to Register.');
+        UiUtils.showMassage(
+          context,
+          AppLocalizations.of(context)!.failed_register,
+        );
       }
-
     }
   }
 }

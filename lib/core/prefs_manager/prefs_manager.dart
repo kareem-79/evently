@@ -43,11 +43,4 @@ class PrefsManager {
   static Future<bool>checkEntering()async{
     return prefs.getBool(ChachConstant.isFirst)??false;
   }
-  static Future<void> saveLoginStatus(bool loggedIn) async {
-    prefs.setBool(ChachConstant.isLoggedIn, loggedIn);
-  }
-
-  static Future<bool> isLoggedIn() async {
-    return prefs.getBool(ChachConstant.isLoggedIn) ?? false;
-  }
 }

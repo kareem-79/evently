@@ -59,5 +59,22 @@
   "choose_event_location": "选择活动地点",
   "add_event": "添加活动",
   "create_event": "创建活动",
-  "logout": "退出"
+  "logout": "退出",
+  "failed_register": "注册失败。",
+  "account_exists": "该邮箱的账户已存在。",
+  "weak_password": "提供的密码太弱。",
+  "failed_login": "登录失败。",
+  "incorrect_credentials": "电子邮件或密码不正确。",
+  "personalize_title": "个性化您的体验",
+  "personalize_description": "选择您喜欢的主题和语言，以开始符合您风格的舒适个性化体验。",
+
+  "find_events_title": "发现激发你灵感的活动",
+  "find_events_description": "沉浸在为你的独特兴趣量身打造的活动世界中。无论你喜欢现场音乐、艺术工作坊、专业社交，还是探索新的体验，我们都能满足你。我们精心推荐的活动将帮助你探索、连接并充分利用身边的每一个机会。",
+
+  "event_planning_title": "轻松的活动策划",
+  "event_planning_description": "使用我们的一体化工具，让活动组织变得简单。从设置邀请、管理回复到安排提醒和协调细节，我们都为你搞定。轻松规划，专注于最重要的事——为你和你的宾客创造难忘的体验。",
+
+  "connect_friends_title": "与朋友联系并分享时刻",
+  "connect_friends_description": "通过与他人分享体验，让每个活动都变得难忘。我们的平台让你可以邀请朋友、保持联系并共同庆祝。捕捉并分享精彩时刻，与网络中的人一起重温和珍藏回忆。",
+  "finish": "完成"
 }
