@@ -236,4 +236,10 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get finish => '完了';
+
+  @override
+  String get login_success => 'ログインに成功しました。';
+
+  @override
+  String get account_created => 'アカウントが正常に作成されました。';
 }

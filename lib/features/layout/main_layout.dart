@@ -4,7 +4,9 @@ import 'package:evently/features/layout/home/home_tab.dart';
 import 'package:evently/features/layout/map/map_tab.dart';
 import 'package:evently/features/layout/profile/profile_tab.dart';
 import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/provider/map_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
@@ -16,7 +18,15 @@ class MainLayout extends StatefulWidget {
 class _MainLayoutState extends State<MainLayout> {
   int selectedIndex = 0;
 
-  final List<Widget> tabs = [HomeTab(), MapTab(), FavTab(), ProfileTab()];
+  final List<Widget> tabs = [
+    HomeTab(),
+    ChangeNotifierProvider(
+      create: (context)=>MapProvider(),
+      child: MapTab(),
+    ),
+    FavTab(),
+    ProfileTab(),
+  ];
 
   @override
   Widget build(BuildContext context) {

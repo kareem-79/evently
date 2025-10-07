@@ -76,5 +76,7 @@
 
   "connect_friends_title": "与朋友联系并分享时刻",
   "connect_friends_description": "通过与他人分享体验，让每个活动都变得难忘。我们的平台让你可以邀请朋友、保持联系并共同庆祝。捕捉并分享精彩时刻，与网络中的人一起重温和珍藏回忆。",
-  "finish": "完成"
+  "finish": "完成",
+  "login_success": "登录成功。",
+  "account_created": "账户已成功创建。"
 }

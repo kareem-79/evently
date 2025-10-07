@@ -236,4 +236,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get finish => 'Finish';
+
+  @override
+  String get login_success => 'Login is successful.';
+
+  @override
+  String get account_created => 'The account has been created successfully.';
 }

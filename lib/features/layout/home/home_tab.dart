@@ -5,6 +5,7 @@ import 'package:evently/core/widget/event_item.dart';
 import 'package:evently/model/event_model.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/model/category_model.dart';
+import 'package:evently/model/user_model.dart';
 import 'package:evently/provider/config_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,7 +49,7 @@ class _HomeTabState extends State<HomeTab> {
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
                           Text(
-                            "Kareem Mohamed",
+                            UserModel.currentUser!.name,
                             style: Theme.of(context).textTheme.headlineLarge,
                           ),
                           Row(

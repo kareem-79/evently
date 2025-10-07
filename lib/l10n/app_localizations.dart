@@ -557,6 +557,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Finish'**
   String get finish;
+
+  /// No description provided for @login_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Login is successful.'**
+  String get login_success;
+
+  /// No description provided for @account_created.
+  ///
+  /// In en, this message translates to:
+  /// **'The account has been created successfully.'**
+  String get account_created;
 }
 
 class _AppLocalizationsDelegate

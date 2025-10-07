@@ -239,4 +239,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get finish => 'Завершить';
+
+  @override
+  String get login_success => 'Вход выполнен успешно.';
+
+  @override
+  String get account_created => 'Аккаунт успешно создан.';
 }

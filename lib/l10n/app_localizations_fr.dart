@@ -239,4 +239,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get finish => 'Terminer';
+
+  @override
+  String get login_success => 'Connexion réussie.';
+
+  @override
+  String get account_created => 'Le compte a été créé avec succès.';
 }

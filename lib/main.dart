@@ -1,6 +1,8 @@
 import 'package:evently/config/theme/theme_manager.dart';
 import 'package:evently/core/prefs_manager/prefs_manager.dart';
 import 'package:evently/core/resources/routes_manager.dart';
+import 'package:evently/firebase/firebase_service.dart';
+import 'package:evently/model/user_model.dart';
 import 'package:evently/provider/config_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -15,6 +17,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await PrefsManager.init();
+  if (FirebaseAuth.instance.currentUser != null) {
+    UserModel.currentUser = await FirebaseService.getUserFromFireStore(
+      FirebaseAuth.instance.currentUser!.uid,
+    );
+  }
   final configProvider = ConfigProvider();
   await configProvider.loadSavedSettings();
   runApp(

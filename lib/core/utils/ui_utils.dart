@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../resources/colors_manager.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class UiUtils {
   static void showLoadingDialog(
@@ -35,8 +35,23 @@ class UiUtils {
       builder: (context) => AlertDialog(
         elevation: 6,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        content: Text(massage, style: Theme.of(context).textTheme.titleSmall,textAlign: TextAlign.center,),
+        content: Text(
+          massage,
+          style: Theme.of(context).textTheme.titleSmall,
+          textAlign: TextAlign.center,
+        ),
       ),
+    );
+  }
+
+  static void showToast(String massage, Color color) {
+    Fluttertoast.showToast(
+      msg: massage,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: color,
+      textColor: Colors.white,
+      fontSize: 16.0,
     );
   }
 }

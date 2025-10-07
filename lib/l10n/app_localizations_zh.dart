@@ -235,4 +235,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get finish => '完成';
+
+  @override
+  String get login_success => '登录成功。';
+
+  @override
+  String get account_created => '账户已成功创建。';
 }

@@ -76,5 +76,7 @@
 
   "connect_friends_title": "Connectez-vous avec vos amis et partagez des moments",
   "connect_friends_description": "Rendez chaque événement mémorable en partageant l'expérience avec les autres. Notre plateforme vous permet d'inviter des amis, de les tenir informés et de célébrer ensemble. Capturez et partagez l'émotion pour revivre les meilleurs moments et chérir les souvenirs.",
-  "finish": "Terminer"
+  "finish": "Terminer",
+  "login_success": "Connexion réussie.",
+  "account_created": "Le compte a été créé avec succès."
 }

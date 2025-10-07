@@ -1,7 +1,6 @@
 import 'package:evently/core/prefs_manager/prefs_manager.dart';
 import 'package:evently/core/resources/assets_manager.dart';
 import 'package:evently/core/resources/colors_manager.dart';
-import 'package:evently/core/resources/constant.dart';
 import 'package:evently/core/resources/routes_manager.dart';
 import 'package:evently/core/utils/ui_utils.dart';
 import 'package:evently/core/utils/validation.dart';
@@ -10,6 +9,7 @@ import 'package:evently/core/widget/custom_text_button.dart';
 import 'package:evently/core/widget/custom_text_form_filed.dart';
 import 'package:evently/firebase/firebase_service.dart';
 import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    //saveLogin();
     emailController = TextEditingController();
     passwordController = TextEditingController();
   }
@@ -43,7 +44,12 @@ class _LoginScreenState extends State<LoginScreen> {
     passwordController.dispose();
     super.dispose();
   }
-
+  // Future<void> saveLogin() async {
+  //   if(FirebaseAuth.instance.currentUser!=null){
+  //     UserModel.currentUser=await FirebaseService.getUserFromFireStore(FirebaseAuth.instance.currentUser!.uid);
+  //     Navigator.pushReplacementNamed(context, RoutesManager.mainLayout);
+  //   }
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,9 +100,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   validator: (input) {
                     if (input == null || input.trim().isEmpty) {
                       return AppLocalizations.of(context)!.password_required;
-                    }
-                    if (input.length < 8) {
-                      return AppLocalizations.of(context)!.password_min;
                     }
                     return null;
                   },
@@ -176,8 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     side: BorderSide(color: ColorsManager.blue),
                   ),
-                  onPressed: () {
-                  },
+                  onPressed: () {},
                   child: Padding(
                     padding: EdgeInsets.all(12.0.sp),
                     child: Row(
@@ -209,15 +211,26 @@ class _LoginScreenState extends State<LoginScreen> {
     if (formKey.currentState?.validate() ?? false) {
       try {
         UiUtils.showLoadingDialog(context);
-        await FirebaseService.login(emailController.text, passwordController.text);
+        UserCredential userCredential = await FirebaseService.login(
+          emailController.text,
+          passwordController.text,
+        );
+        UserModel.currentUser = await FirebaseService.getUserFromFireStore(
+          userCredential.user!.uid,
+        );
         UiUtils.hideDialog(context);
         _navigate();
+        UiUtils.showToast(AppLocalizations.of(context)!.login_success, Colors.green);
       } on FirebaseAuthException catch (e) {
         UiUtils.hideDialog(context);
-        UiUtils.showMassage(context, AppLocalizations.of(context)!.incorrect_credentials);
-      }catch(e){
+        UiUtils.showToast(
+          AppLocalizations.of(context)!.incorrect_credentials,ColorsManager.red
+        );
+      } catch (e) {
         UiUtils.hideDialog(context);
-        UiUtils.showMassage(context, AppLocalizations.of(context)!.failed_login);
+        UiUtils.showToast(
+          AppLocalizations.of(context)!.failed_login,ColorsManager.red
+        );
       }
     }
   }
@@ -231,5 +244,4 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.pushReplacementNamed(context, RoutesManager.mainLayout);
     }
   }
-  }
-
+}

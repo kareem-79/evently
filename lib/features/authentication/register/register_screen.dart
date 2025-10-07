@@ -74,9 +74,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     if (input == null || input.trim().isEmpty) {
                       return AppLocalizations.of(context)!.name_required;
                     }
-                    if (input.length < 5) {
-                      return AppLocalizations.of(context)!.name_min;
-                    }
                     return null;
                   },
                 ),
@@ -100,9 +97,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   validator: (input) {
                     if (input == null || input.trim().isEmpty) {
                       return AppLocalizations.of(context)!.password_required;
-                    }
-                    if (input.length < 8) {
-                      return AppLocalizations.of(context)!.password_min;
                     }
                     return null;
                   },
@@ -170,24 +164,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
         );
         UiUtils.hideDialog(context);
         Navigator.pushReplacementNamed(context, RoutesManager.login);
+        UiUtils.showToast(
+          AppLocalizations.of(context)!.create_account,
+          Colors.green,
+        );
       } on FirebaseAuthException catch (e) {
         UiUtils.hideDialog(context);
         if (e.code == 'weak-password') {
-          UiUtils.showMassage(
-            context,
+          UiUtils.showToast(
             AppLocalizations.of(context)!.weak_password,
+            Colors.red,
           );
         } else if (e.code == 'email-already-in-use') {
-          UiUtils.showMassage(
-            context,
+          UiUtils.showToast(
             AppLocalizations.of(context)!.account_exists,
+            Colors.red,
           );
         }
       } catch (e) {
         UiUtils.hideDialog(context);
-        UiUtils.showMassage(
-          context,
+        UiUtils.showToast(
           AppLocalizations.of(context)!.failed_register,
+          Colors.red,
         );
       }
     }
