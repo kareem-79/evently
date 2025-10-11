@@ -1,9 +1,12 @@
-import 'package:evently/core/resources/colors_manager.dart';
+import 'package:evently/core/resources/routes_manager.dart';
 import 'package:evently/features/layout/fav/fav_tab.dart';
 import 'package:evently/features/layout/home/home_tab.dart';
 import 'package:evently/features/layout/map/map_tab.dart';
 import 'package:evently/features/layout/profile/profile_tab.dart';
+import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/provider/map_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
@@ -15,16 +18,25 @@ class MainLayout extends StatefulWidget {
 class _MainLayoutState extends State<MainLayout> {
   int selectedIndex = 0;
 
-  final List<Widget> tabs = [HomeTab(), MapTab(), FavTab(), ProfileTab()];
+  final List<Widget> tabs = [
+    HomeTab(),
+    ChangeNotifierProvider(
+      create: (context)=>MapProvider(),
+      child: MapTab(),
+    ),
+    FavTab(),
+    ProfileTab(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
       body: tabs[selectedIndex],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, RoutesManager.createEvent);
+        },
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomAppBar(
@@ -44,7 +56,7 @@ class _MainLayoutState extends State<MainLayout> {
               icon: Icon(
                 selectedIndex == 0 ? Icons.home_filled : Icons.home_outlined,
               ),
-              label: "Home",
+              label: AppLocalizations.of(context)!.home,
             ),
             BottomNavigationBarItem(
               icon: Icon(
@@ -52,19 +64,19 @@ class _MainLayoutState extends State<MainLayout> {
                     ? Icons.location_on_sharp
                     : Icons.location_on_outlined,
               ),
-              label: "Map",
+              label: AppLocalizations.of(context)!.map,
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 selectedIndex == 2 ? Icons.favorite : Icons.favorite_outline,
               ),
-              label: "Favorite",
+              label: AppLocalizations.of(context)!.favorite,
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 selectedIndex == 3 ? Icons.person : Icons.person_outline,
               ),
-              label: "Person",
+              label: AppLocalizations.of(context)!.profile,
             ),
           ],
         ),
