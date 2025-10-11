@@ -33,11 +33,10 @@ class FavTab extends StatelessWidget {
               child: ListView.builder(
                 itemBuilder: (context, index) => EventItem(
                   event: EventModel(
-                    categoryModel: CategoryModel.categoryWithAll(context)[2],
+                    category: CategoryModel.categoryWithAll(context)[2],
                     title: "meeting",
                     description: "Meeting for Updating The Development Method ",
-                    dateTime: DateTime.now(),
-                    timeOfDay: TimeOfDay.now(),
+                    dateTime: DateTime.now(), id: '', ownerId: '',
                   ),
                 ),
                 itemCount: 10,

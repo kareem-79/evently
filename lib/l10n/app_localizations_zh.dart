@@ -241,4 +241,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get account_created => '账户已成功创建。';
+
+  @override
+  String get event_added => '活动已添加。';
 }

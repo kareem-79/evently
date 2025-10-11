@@ -78,5 +78,6 @@
   "connect_friends_description": "Rendez chaque événement mémorable en partageant l'expérience avec les autres. Notre plateforme vous permet d'inviter des amis, de les tenir informés et de célébrer ensemble. Capturez et partagez l'émotion pour revivre les meilleurs moments et chérir les souvenirs.",
   "finish": "Terminer",
   "login_success": "Connexion réussie.",
-  "account_created": "Le compte a été créé avec succès."
+  "account_created": "Le compte a été créé avec succès.",
+  "event_added": "L'événement a été ajouté."
 }

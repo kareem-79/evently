@@ -245,4 +245,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get account_created => 'Le compte a été créé avec succès.';
+
+  @override
+  String get event_added => 'L\'événement a été ajouté.';
 }

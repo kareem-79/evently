@@ -1,18 +1,42 @@
 import 'package:evently/model/category_model.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class EventModel {
-  CategoryModel categoryModel;
+  String id;
+  String ownerId;
+  CategoryModel category;
   String title;
   String description;
   DateTime dateTime;
-  TimeOfDay timeOfDay;
 
   EventModel({
-    required this.categoryModel,
+    required this.id,
+    required this.ownerId,
+    required this.category,
     required this.title,
     required this.description,
     required this.dateTime,
-    required this.timeOfDay,
+
   });
+
+  EventModel.fromJson(Map<String, dynamic> json, BuildContext context)
+    : this(
+        id: json["id"],
+        ownerId: json["ownerId"],
+        category: CategoryModel.category(
+          context,
+        ).firstWhere((category) => category.id == json["categoryId"]),
+        title: json["title"],
+        description: json["description"],
+        dateTime: json["dateTime"].toDate(),
+      );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "ownerId": ownerId,
+    "categoryId": category.id,
+    "title": title,
+    "description": description,
+    "dateTime": dateTime,
+  };
 }

@@ -245,4 +245,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get account_created => 'La cuenta se ha creado correctamente.';
+
+  @override
+  String get event_added => 'El evento ha sido agregado.';
 }

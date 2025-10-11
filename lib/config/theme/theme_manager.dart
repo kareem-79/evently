@@ -20,6 +20,65 @@ class ThemeManager {
       ),
       centerTitle: true,
     ),
+    datePickerTheme: DatePickerThemeData(
+      backgroundColor: ColorsManager.white,
+      headerBackgroundColor: ColorsManager.blue,
+      headerForegroundColor: ColorsManager.white,
+      surfaceTintColor: Colors.transparent,
+      dayStyle: TextStyle(color: ColorsManager.black),
+      weekdayStyle: TextStyle(color: ColorsManager.gray),
+      yearStyle: TextStyle(color: ColorsManager.black),
+      dayForegroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+        if (states.contains(WidgetState.selected)) {
+          return ColorsManager.white;
+        }
+        if (states.contains(WidgetState.disabled)) {
+          return ColorsManager.gray;
+        }
+        return ColorsManager.black;
+      }),
+      dayBackgroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+        if (states.contains(WidgetState.selected)) {
+          return ColorsManager.blue;
+        }
+        if (states.contains(WidgetState.selected)) {
+          return ColorsManager.blue.withOpacity(0.15);
+        }
+        return Colors.transparent;
+      }),
+    ),
+    timePickerTheme: TimePickerThemeData(
+      backgroundColor: ColorsManager.whiteBlue,
+      hourMinuteTextColor: ColorsManager.blue,
+      hourMinuteShape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+      ),
+      dayPeriodColor: ColorsManager.whiteBlue,
+      dayPeriodTextColor: MaterialStateColor.resolveWith((states) {
+        if (states.contains(MaterialState.selected)) {
+          return ColorsManager.blue;
+        }
+        return ColorsManager.black;
+      }),
+      dayPeriodShape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(6)),
+        side: BorderSide(color: ColorsManager.blue),
+      ),
+      dialBackgroundColor: ColorsManager.whiteBlue,
+      dialHandColor: ColorsManager.blue,
+      dialTextColor: ColorsManager.black,
+      entryModeIconColor: ColorsManager.blue,
+      helpTextStyle: TextStyle(color: ColorsManager.blue),
+      confirmButtonStyle: TextButton.styleFrom(
+        foregroundColor: ColorsManager.blue,
+      ),
+      cancelButtonStyle: TextButton.styleFrom(
+        foregroundColor: ColorsManager.gray,
+      ),
+    ),
+
+
+
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: ColorsManager.blue,
       shape: StadiumBorder(
@@ -131,9 +190,7 @@ class ThemeManager {
       shape: const CircularNotchedRectangle(),
     ),
     cardTheme: CardThemeData(color: Colors.white),
-    dialogTheme: DialogThemeData(
-      backgroundColor: ColorsManager.whiteBlue
-    )
+    dialogTheme: DialogThemeData(backgroundColor: ColorsManager.whiteBlue),
   );
   static final ThemeData dark = ThemeData(
     primaryColor: ColorsManager.darkBlue,
@@ -151,6 +208,65 @@ class ThemeManager {
       ),
       centerTitle: true,
     ),
+    datePickerTheme: DatePickerThemeData(
+      backgroundColor: ColorsManager.darkBlue,
+      headerBackgroundColor: ColorsManager.darkBlue,
+      headerForegroundColor: ColorsManager.ofWhite,
+      surfaceTintColor: Colors.transparent,
+      dayStyle: TextStyle(color: ColorsManager.ofWhite),
+      weekdayStyle: TextStyle(color: ColorsManager.ofWhite.withOpacity(0.8)),
+      yearStyle: TextStyle(color: ColorsManager.ofWhite),
+      dayForegroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+        if (states.contains(WidgetState.selected)) {
+          return ColorsManager.ofWhite;
+        }
+        if (states.contains(WidgetState.disabled)) {
+          return ColorsManager.gray;
+        }
+        return ColorsManager.ofWhite;
+      }),
+      dayBackgroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+        if (states.contains(WidgetState.selected)) {
+          return ColorsManager.blue;
+        }
+        if (states.contains(WidgetState.selected)) {
+          return ColorsManager.darkBlue.withOpacity(0.4);
+        }
+        return Colors.transparent;
+      }),
+    ),
+    timePickerTheme: TimePickerThemeData(
+      backgroundColor: ColorsManager.darkBlue,
+      hourMinuteTextColor: ColorsManager.white,
+      hourMinuteShape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+      ),
+      dayPeriodColor: ColorsManager.darkBlue,
+      dayPeriodTextColor: MaterialStateColor.resolveWith((states) {
+        if (states.contains(MaterialState.selected)) {
+          return ColorsManager.blue;
+        }
+        return ColorsManager.ofWhite;
+      }),
+      dayPeriodShape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(6)),
+        side: BorderSide(color: Colors.white24),
+      ),
+      dialBackgroundColor: ColorsManager.black,
+      dialHandColor: ColorsManager.blue,
+      dialTextColor: ColorsManager.ofWhite,
+      entryModeIconColor: ColorsManager.blue,
+      helpTextStyle: TextStyle(color: ColorsManager.ofWhite),
+      confirmButtonStyle: TextButton.styleFrom(
+        foregroundColor: ColorsManager.blue,
+      ),
+      cancelButtonStyle: TextButton.styleFrom(
+        foregroundColor: ColorsManager.gray,
+      ),
+    ),
+
+
+
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: ColorsManager.darkBlue,
       foregroundColor: ColorsManager.ofWhite,
@@ -263,8 +379,6 @@ class ThemeManager {
       shape: const CircularNotchedRectangle(),
     ),
     cardTheme: CardThemeData(color: ColorsManager.darkBlue),
-    dialogTheme: DialogThemeData(
-      backgroundColor: ColorsManager.darkBlue,
-    )
+    dialogTheme: DialogThemeData(backgroundColor: ColorsManager.darkBlue),
   );
 }

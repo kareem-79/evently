@@ -243,4 +243,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get account_created => 'تم إنشاء الحساب بنجاح.';
+
+  @override
+  String get event_added => 'تمت إضافة الحدث بنجاح.';
 }

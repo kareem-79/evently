@@ -245,4 +245,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get account_created => 'Аккаунт успешно создан.';
+
+  @override
+  String get event_added => 'Событие было добавлено.';
 }

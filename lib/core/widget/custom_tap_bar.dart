@@ -5,6 +5,13 @@ import 'custom_tap_item.dart';
 import '../../model/category_model.dart';
 
 class CustomTapBar extends StatefulWidget {
+  final List<CategoryModel> categories;
+  final Color selectedBgColor;
+  final Color selectedFgColor;
+  final Color unSelectedBgColor;
+  final Color unSelectedFgColor;
+  final void Function(CategoryModel)? onCategoryItemSelected;
+
   const CustomTapBar({
     super.key,
     required this.categories,
@@ -12,13 +19,8 @@ class CustomTapBar extends StatefulWidget {
     required this.selectedFgColor,
     required this.unSelectedBgColor,
     required this.unSelectedFgColor,
+    this.onCategoryItemSelected,
   });
-
-  final List<CategoryModel> categories;
-  final Color selectedBgColor;
-  final Color selectedFgColor;
-  final Color unSelectedBgColor;
-  final Color unSelectedFgColor;
 
   @override
   State<CustomTapBar> createState() => _CustomTapBarState();
@@ -34,6 +36,7 @@ class _CustomTapBarState extends State<CustomTapBar> {
       child: TabBar(
         labelPadding: EdgeInsets.all(5.sp),
         onTap: (index) {
+          widget.onCategoryItemSelected!(widget.categories[index]);
           setState(() {
             selectedIndex = index;
           });

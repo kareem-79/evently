@@ -78,5 +78,6 @@
   "connect_friends_description": "Haz que cada evento sea memorable compartiendo la experiencia con otros. Nuestra plataforma te permite invitar a tus amigos, mantenerlos informados y celebrar juntos. Captura y comparte la emoción para revivir los mejores momentos y atesorar los recuerdos.",
   "finish": "Finalizar",
   "login_success": "Inicio de sesión exitoso.",
-  "account_created": "La cuenta se ha creado correctamente."
+  "account_created": "La cuenta se ha creado correctamente.",
+  "event_added": "El evento ha sido agregado."
 }

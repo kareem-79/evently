@@ -242,4 +242,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get account_created => 'アカウントが正常に作成されました。';
+
+  @override
+  String get event_added => 'イベントが追加されました。';
 }

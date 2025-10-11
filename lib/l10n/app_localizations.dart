@@ -569,6 +569,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The account has been created successfully.'**
   String get account_created;
+
+  /// No description provided for @event_added.
+  ///
+  /// In en, this message translates to:
+  /// **'The event has been added.'**
+  String get event_added;
 }
 
 class _AppLocalizationsDelegate

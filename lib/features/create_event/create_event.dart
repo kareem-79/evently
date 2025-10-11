@@ -1,12 +1,16 @@
 import 'package:evently/core/extension/date_time_extension.dart';
 import 'package:evently/core/resources/assets_manager.dart';
 import 'package:evently/core/resources/colors_manager.dart';
+import 'package:evently/core/utils/ui_utils.dart';
 import 'package:evently/core/widget/custom_elevated_button.dart';
 import 'package:evently/core/widget/custom_tap_bar.dart';
 import 'package:evently/core/widget/custom_text_button.dart';
 import 'package:evently/core/widget/custom_text_form_filed.dart';
+import 'package:evently/firebase/firebase_service.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/model/category_model.dart';
+import 'package:evently/model/event_model.dart';
+import 'package:evently/model/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,8 +25,9 @@ class _CreateEventState extends State<CreateEvent> {
   late TextEditingController titleController;
   late TextEditingController descriptionController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  DateTime selectedDate=DateTime.now();
-  late  TimeOfDay selectedTime=TimeOfDay.now();
+  DateTime selectedDate = DateTime.now();
+  late TimeOfDay selectedTime = TimeOfDay.now();
+  late CategoryModel selectedCategory=CategoryModel.category(context)[0];
 
   @override
   void initState() {
@@ -64,6 +69,11 @@ class _CreateEventState extends State<CreateEvent> {
                 ),
                 SizedBox(height: 12.h),
                 CustomTapBar(
+                  onCategoryItemSelected: (category){
+                    setState(() {
+                      selectedCategory=category;
+                    });
+                  },
                   categories: CategoryModel.category(context),
                   selectedBgColor: ColorsManager.blue,
                   selectedFgColor: ColorsManager.white,
@@ -179,29 +189,46 @@ class _CreateEventState extends State<CreateEvent> {
     );
   }
 
-  void _addEvent() {
+  Future<void> _addEvent() async {
     if (_formKey.currentState?.validate() == false) return;
+    UiUtils.showLoadingDialog(context);
+    EventModel event = EventModel(
+      id: "",
+      ownerId: UserModel.currentUser!.id,
+      category: selectedCategory,
+      title: titleController.text,
+      description: descriptionController.text,
+      dateTime: selectedDate,
+    );
+    await FirebaseService.addEventToFireStore(event, context);
+    UiUtils.hideDialog(context);
+    Navigator.pop(context);
+    UiUtils.showToast(AppLocalizations.of(context)!.event_added, Colors.green);
   }
 
-  void _selectEventTime()async {
-    selectedTime=await showTimePicker(context: context, initialTime:TimeOfDay.now())??selectedTime;
-    selectedDate=selectedDate.copyWith(
+  void _selectEventTime() async {
+    selectedTime =
+        await showTimePicker(context: context, initialTime: TimeOfDay.now()) ??
+        selectedTime;
+    selectedDate = selectedDate.copyWith(
       hour: selectedTime.hour,
-      minute: selectedTime.minute
+      minute: selectedTime.minute,
     );
-    setState(() {
-
-    });
+    setState(() {});
   }
 
-  void _selectedEventDay() async{
-    selectedDate=await showDatePicker(context: context, firstDate: DateTime.now(), lastDate: DateTime.now().add(Duration(days: 365)))??selectedDate;
-    selectedDate=selectedDate.copyWith(
-        hour: selectedTime.hour,
-        minute: selectedTime.minute
+  void _selectedEventDay() async {
+    selectedDate =
+        await showDatePicker(
+          context: context,
+          firstDate: DateTime.now(),
+          lastDate: DateTime.now().add(Duration(days: 365)),
+        ) ??
+        selectedDate;
+    selectedDate = selectedDate.copyWith(
+      hour: selectedTime.hour,
+      minute: selectedTime.minute,
     );
-    setState(() {
-
-    });
+    setState(() {});
   }
 }
