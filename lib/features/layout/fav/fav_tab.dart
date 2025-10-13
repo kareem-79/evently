@@ -1,10 +1,10 @@
 import 'package:evently/core/resources/colors_manager.dart';
+import 'package:evently/firebase/firebase_services.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../core/widget/event_item.dart';
+import '../../../core/widget/custom_event_item.dart';
 import '../../../model/event_model.dart';
-import '../../../model/category_model.dart';
 
 class FavTab extends StatelessWidget {
   const FavTab({super.key});
@@ -29,18 +29,26 @@ class FavTab extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(
-              child: ListView.builder(
-                itemBuilder: (context, index) => EventItem(
-                  event: EventModel(
-                    category: CategoryModel.categoryWithAll(context)[2],
-                    title: "meeting",
-                    description: "Meeting for Updating The Development Method ",
-                    dateTime: DateTime.now(), id: '', ownerId: '',
+            FutureBuilder(
+              future: FirebaseServices.getFavouriteEvents(context),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                if (snapshot.hasError) {
+                  return Center(child: Text(snapshot.hasError.toString()));
+                }
+                List<EventModel> favEvents = snapshot.data ?? [];
+                return Expanded(
+                  child: ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemBuilder: (context, index) => EventItem(
+                      event: favEvents[index], isFavorite: true,
+                    ),
+                    itemCount: favEvents.length,
                   ),
-                ),
-                itemCount: 10,
-              ),
+                );
+              }
             ),
           ],
         ),

@@ -18,12 +18,11 @@ class EventModel {
     required this.dateTime,
 
   });
-
   EventModel.fromJson(Map<String, dynamic> json, BuildContext context)
     : this(
         id: json["id"],
         ownerId: json["ownerId"],
-        category: CategoryModel.category(
+        category: CategoryModel.categoryWithAll(
           context,
         ).firstWhere((category) => category.id == json["categoryId"]),
         title: json["title"],

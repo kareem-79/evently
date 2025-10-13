@@ -7,7 +7,7 @@ import 'package:evently/core/utils/validation.dart';
 import 'package:evently/core/widget/custom_elevated_button.dart';
 import 'package:evently/core/widget/custom_text_button.dart';
 import 'package:evently/core/widget/custom_text_form_filed.dart';
-import 'package:evently/firebase/firebase_service.dart';
+import 'package:evently/firebase/firebase_services.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -211,11 +211,11 @@ class _LoginScreenState extends State<LoginScreen> {
     if (formKey.currentState?.validate() ?? false) {
       try {
         UiUtils.showLoadingDialog(context);
-        UserCredential userCredential = await FirebaseService.login(
+        UserCredential userCredential = await FirebaseServices.login(
           emailController.text,
           passwordController.text,
         );
-        UserModel.currentUser = await FirebaseService.getUserFromFireStore(
+        UserModel.currentUser = await FirebaseServices.getUserFromFireStore(
           userCredential.user!.uid,
         );
         UiUtils.hideDialog(context);

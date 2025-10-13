@@ -5,7 +5,7 @@ import 'package:evently/core/utils/validation.dart';
 import 'package:evently/core/widget/custom_elevated_button.dart';
 import 'package:evently/core/widget/custom_text_button.dart';
 import 'package:evently/core/widget/custom_text_form_filed.dart';
-import 'package:evently/firebase/firebase_service.dart';
+import 'package:evently/firebase/firebase_services.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -151,15 +151,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (formKey.currentState?.validate() ?? false) {
       try {
         UiUtils.showLoadingDialog(context);
-        UserCredential credential = await FirebaseService.register(
+        UserCredential credential = await FirebaseServices.register(
           emailController.text,
           passwordController.text,
         );
-        await FirebaseService.addUserToFirestore(
+        await FirebaseServices.addUserToFirestore(
           UserModel(
             id: credential.user!.uid,
             name: nameController.text,
             email: emailController.text,
+            favouriteEventIds: [],
           ),
         );
         UiUtils.hideDialog(context);

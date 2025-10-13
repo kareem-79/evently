@@ -1,27 +1,36 @@
 import 'package:evently/core/extension/date_time_extension.dart';
-import 'package:evently/core/resources/assets_manager.dart';
 import 'package:evently/core/resources/colors_manager.dart';
+import 'package:evently/firebase/firebase_services.dart';
 import 'package:evently/model/event_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class EventItem extends StatelessWidget {
-  const EventItem({super.key, required this.event});
+class EventItem extends StatefulWidget {
+  EventItem({super.key, required this.event, required this.isFavorite});
+
   final EventModel event;
+  bool isFavorite;
+
+  @override
+  State<EventItem> createState() => _EventItemState();
+}
+
+class _EventItemState extends State<EventItem> {
+  late bool favEvent = widget.isFavorite;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(8),
-      margin: EdgeInsets.symmetric(horizontal: 16,vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       width: double.infinity,
       height: 204.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
         border: Border.all(color: ColorsManager.blue),
         image: DecorationImage(
-          image: AssetImage(ImageAssets.meeting),
+          image: AssetImage(widget.event.category.imagePath),
           fit: BoxFit.fill,
         ),
       ),
@@ -33,9 +42,12 @@ class EventItem extends StatelessWidget {
               padding: EdgeInsets.all(8.0.sp),
               child: Column(
                 children: [
-                  Text("${event.dateTime.day}", style: Theme.of(context).textTheme.titleMedium),
                   Text(
-                    event.dateTime.viewMonth,
+                    "${widget.event.dateTime.day}",
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  Text(
+                    widget.event.dateTime.viewMonth,
                     style: GoogleFonts.inter(
                       fontSize: 16.sp,
                       color: ColorsManager.blue,
@@ -46,10 +58,10 @@ class EventItem extends StatelessWidget {
               ),
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Card(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusGeometry.circular(16.r),
+              borderRadius: BorderRadius.circular(16.r),
             ),
             child: Row(
               children: [
@@ -57,14 +69,22 @@ class EventItem extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      event.description,
-                      style: Theme.of(context).textTheme.bodySmall
+                      widget.event.description,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.favorite_border),
+                GestureDetector(
+                  onTap: _markEventAsFavorite,
+                  child: Padding(
+                    padding: EdgeInsets.all(12.0.sp),
+                    child: Icon(
+                      favEvent
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: ColorsManager.blue,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -72,5 +92,16 @@ class EventItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _markEventAsFavorite() async {
+    if (favEvent) {
+      await FirebaseServices.removeEventFromFavorite(widget.event);
+      favEvent = false;
+    } else {
+      await FirebaseServices.addEventToFavorite(widget.event);
+      favEvent = true;
+    }
+    setState(() {});
   }
 }

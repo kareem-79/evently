@@ -1,8 +1,8 @@
 import 'package:evently/core/prefs_manager/prefs_manager.dart';
 import 'package:evently/core/resources/colors_manager.dart';
 import 'package:evently/core/widget/custom_tap_bar.dart';
-import 'package:evently/core/widget/event_item.dart';
-import 'package:evently/firebase/firebase_service.dart';
+import 'package:evently/core/widget/custom_event_item.dart';
+import 'package:evently/firebase/firebase_services.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/model/category_model.dart';
 import 'package:evently/model/event_model.dart';
@@ -121,7 +121,7 @@ class _HomeTabState extends State<HomeTab> {
           ),
         ),
         StreamBuilder(
-          stream: FirebaseService.getEventsWithRealTimeUpdates(context, selectedCategory),
+          stream: FirebaseServices.getEventsWithRealTimeUpdates(context, selectedCategory),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
@@ -135,7 +135,7 @@ class _HomeTabState extends State<HomeTab> {
                 padding: EdgeInsets.zero,
                 itemCount: events.length,
                 itemBuilder: (context, index) =>
-                    (EventItem(event: events[index])),
+                    (EventItem(event: events[index], isFavorite: UserModel.currentUser!.favouriteEventIds.contains(events[index].id),)),
               ),
             );
           },

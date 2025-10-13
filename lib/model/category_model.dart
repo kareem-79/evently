@@ -21,7 +21,7 @@ class CategoryModel {
         id: "0",
         name: AppLocalizations.of(context)!.all,
         iconData: Icons.all_inclusive_rounded,
-        imagePath: ImageAssets.meeting,
+        imagePath: "",
       ),
       CategoryModel(
         id: "1",
@@ -80,6 +80,7 @@ class CategoryModel {
     ];
   }
 
+  // الصور اللي بتظهر في صفحة إنشاء الحدث (Create Event)
   static List<CategoryModel> category(BuildContext context) {
     return [
       CategoryModel(

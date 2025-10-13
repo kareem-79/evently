@@ -26,7 +26,7 @@ abstract class CreateEventAssets{
   static const String bookclub="$base/bookclub.png";
   static const String eating="$base/eating.png";
   static const String exhibition="$base/exhibition.png";
-  static const String football="$base/football.png";
+  static const String football="$base/sports.png";
   static const String gaming="$base/gaming.png";
   static const String holiday="$base/holiday.png";
   static const String workshop="$base/workshop.png";

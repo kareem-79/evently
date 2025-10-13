@@ -6,7 +6,7 @@ import 'package:evently/core/widget/custom_elevated_button.dart';
 import 'package:evently/core/widget/custom_tap_bar.dart';
 import 'package:evently/core/widget/custom_text_button.dart';
 import 'package:evently/core/widget/custom_text_form_filed.dart';
-import 'package:evently/firebase/firebase_service.dart';
+import 'package:evently/firebase/firebase_services.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/model/category_model.dart';
 import 'package:evently/model/event_model.dart';
@@ -61,7 +61,7 @@ class _CreateEventState extends State<CreateEvent> {
                 ClipRRect(
                   borderRadius: BorderRadiusGeometry.circular(16.r),
                   child: Image.asset(
-                    CreateEventAssets.meeting,
+                    selectedCategory.imagePath,
                     fit: BoxFit.fill,
                     width: 361.w,
                     height: 203.h,
@@ -200,7 +200,7 @@ class _CreateEventState extends State<CreateEvent> {
       description: descriptionController.text,
       dateTime: selectedDate,
     );
-    await FirebaseService.addEventToFireStore(event, context);
+    await FirebaseServices.addEventToFireStore(event, context);
     UiUtils.hideDialog(context);
     Navigator.pop(context);
     UiUtils.showToast(AppLocalizations.of(context)!.event_added, Colors.green);

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomTabItem extends StatelessWidget {
-  CustomTabItem({
+  const CustomTabItem({
     super.key,
     required this.category,
     required this.isSelected,
