@@ -79,5 +79,9 @@
   "finish": "完成",
   "login_success": "登录成功。",
   "account_created": "账户已成功创建。",
-  "event_added": "活动已添加。"
+  "event_added": "活动已添加。",
+  "event_details": "活动详情",
+  "tap_on_location_to_select": "点击位置进行选择",
+  "edit_event": "编辑活动",
+  "update_event": "更新活动"
 }

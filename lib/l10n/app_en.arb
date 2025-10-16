@@ -47,10 +47,10 @@
   "login": " Login ",
   "title": "Title",
   "event_title": "Event Title",
-  "title_required": "Title is required",
+  "title_required": "Title is Required",
   "description": "Description",
   "event_description": "Event Description",
-  "description_required": "Description is required",
+  "description_required": "Description is Required",
   "event_date": "Event Date",
   "choose_date": "Choose Date",
   "event_time": "Event Time",
@@ -76,5 +76,10 @@
   "finish": "Finish",
   "login_success": "Login is successful.",
   "account_created": "The account has been created successfully.",
-  "event_added": "The event has been added."
+  "event_added": "The event has been added.",
+  "event_details": "Event Details",
+  "tap_on_location_to_select": "Tap on Location To Select",
+  "edit_event": "Edit Event",
+  "update_event": "Update Event"
+
 }

@@ -399,7 +399,7 @@ abstract class AppLocalizations {
   /// No description provided for @title_required.
   ///
   /// In en, this message translates to:
-  /// **'Title is required'**
+  /// **'Title is Required'**
   String get title_required;
 
   /// No description provided for @description.
@@ -417,7 +417,7 @@ abstract class AppLocalizations {
   /// No description provided for @description_required.
   ///
   /// In en, this message translates to:
-  /// **'Description is required'**
+  /// **'Description is Required'**
   String get description_required;
 
   /// No description provided for @event_date.
@@ -575,6 +575,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The event has been added.'**
   String get event_added;
+
+  /// No description provided for @event_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Details'**
+  String get event_details;
+
+  /// No description provided for @tap_on_location_to_select.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap on Location To Select'**
+  String get tap_on_location_to_select;
+
+  /// No description provided for @edit_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Event'**
+  String get edit_event;
+
+  /// No description provided for @update_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Event'**
+  String get update_event;
 }
 
 class _AppLocalizationsDelegate

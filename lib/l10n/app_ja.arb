@@ -79,5 +79,9 @@
   "finish": "完了",
   "login_success": "ログインに成功しました。",
   "account_created": "アカウントが正常に作成されました。",
-  "event_added": "イベントが追加されました。"
+  "event_added": "イベントが追加されました。",
+  "event_details": "イベントの詳細",
+  "tap_on_location_to_select": "場所をタップして選択",
+  "edit_event": "イベントを編集",
+  "update_event": "イベントを更新"
 }

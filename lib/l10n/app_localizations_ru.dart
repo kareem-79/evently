@@ -248,4 +248,16 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get event_added => 'Событие было добавлено.';
+
+  @override
+  String get event_details => 'Детали события';
+
+  @override
+  String get tap_on_location_to_select => 'Нажмите на место, чтобы выбрать';
+
+  @override
+  String get edit_event => 'Редактировать событие';
+
+  @override
+  String get update_event => 'Обновить событие';
 }

@@ -246,4 +246,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get event_added => 'تمت إضافة الحدث بنجاح.';
+
+  @override
+  String get event_details => 'تفاصيل الحدث';
+
+  @override
+  String get tap_on_location_to_select => 'اضغط على الموقع للاختيار';
+
+  @override
+  String get edit_event => 'تعديل الحدث';
+
+  @override
+  String get update_event => 'تحديث الحدث';
 }

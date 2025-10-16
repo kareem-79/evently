@@ -79,5 +79,9 @@
   "finish": "Terminer",
   "login_success": "Connexion réussie.",
   "account_created": "Le compte a été créé avec succès.",
-  "event_added": "L'événement a été ajouté."
+  "event_added": "L'événement a été ajouté.",
+  "event_details": "Détails de l'événement",
+  "tap_on_location_to_select": "Appuyez sur l'emplacement pour sélectionner",
+  "edit_event": "Modifier l'événement",
+  "update_event": "Mettre à jour l'événement"
 }

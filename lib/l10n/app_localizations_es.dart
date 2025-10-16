@@ -248,4 +248,17 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get event_added => 'El evento ha sido agregado.';
+
+  @override
+  String get event_details => 'Detalles del evento';
+
+  @override
+  String get tap_on_location_to_select =>
+      'Toque en la ubicación para seleccionar';
+
+  @override
+  String get edit_event => 'Editar evento';
+
+  @override
+  String get update_event => 'Actualizar evento';
 }

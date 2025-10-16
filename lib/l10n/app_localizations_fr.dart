@@ -248,4 +248,17 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get event_added => 'L\'événement a été ajouté.';
+
+  @override
+  String get event_details => 'Détails de l\'événement';
+
+  @override
+  String get tap_on_location_to_select =>
+      'Appuyez sur l\'emplacement pour sélectionner';
+
+  @override
+  String get edit_event => 'Modifier l\'événement';
+
+  @override
+  String get update_event => 'Mettre à jour l\'événement';
 }

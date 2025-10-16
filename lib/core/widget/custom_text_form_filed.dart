@@ -29,6 +29,7 @@ class CustomTextFormFiled extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.sp),
       child: TextFormField(
+        style: Theme.of(context).textTheme.labelSmall,
         textAlign: TextAlign.start,
         maxLines: maxLine,
         controller: controller,

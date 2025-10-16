@@ -244,4 +244,16 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get event_added => '活动已添加。';
+
+  @override
+  String get event_details => '活动详情';
+
+  @override
+  String get tap_on_location_to_select => '点击位置进行选择';
+
+  @override
+  String get edit_event => '编辑活动';
+
+  @override
+  String get update_event => '更新活动';
 }

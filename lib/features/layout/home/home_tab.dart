@@ -121,7 +121,10 @@ class _HomeTabState extends State<HomeTab> {
           ),
         ),
         StreamBuilder(
-          stream: FirebaseServices.getEventsWithRealTimeUpdates(context, selectedCategory),
+          stream: FirebaseServices.getEventsWithRealTimeUpdates(
+            context,
+            selectedCategory,
+          ),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
@@ -134,8 +137,12 @@ class _HomeTabState extends State<HomeTab> {
               child: ListView.builder(
                 padding: EdgeInsets.zero,
                 itemCount: events.length,
-                itemBuilder: (context, index) =>
-                    (EventItem(event: events[index], isFavorite: UserModel.currentUser!.favouriteEventIds.contains(events[index].id),)),
+                itemBuilder: (context, index) => (EventItem(
+                  event: events[index],
+                  isFavorite: UserModel.currentUser!.favouriteEventIds.contains(
+                    events[index].id,
+                  ),
+                )),
               ),
             );
           },

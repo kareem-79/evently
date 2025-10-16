@@ -79,5 +79,9 @@
   "finish": "إنهاء",
   "login_success": "تم تسجيل الدخول بنجاح.",
   "account_created": "تم إنشاء الحساب بنجاح.",
-  "event_added": "تمت إضافة الحدث بنجاح."
+  "event_added": "تمت إضافة الحدث بنجاح.",
+  "event_details": "تفاصيل الحدث",
+  "tap_on_location_to_select": "اضغط على الموقع للاختيار",
+  "edit_event": "تعديل الحدث",
+  "update_event": "تحديث الحدث"
 }

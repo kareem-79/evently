@@ -245,4 +245,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get event_added => 'イベントが追加されました。';
+
+  @override
+  String get event_details => 'イベントの詳細';
+
+  @override
+  String get tap_on_location_to_select => '場所をタップして選択';
+
+  @override
+  String get edit_event => 'イベントを編集';
+
+  @override
+  String get update_event => 'イベントを更新';
 }

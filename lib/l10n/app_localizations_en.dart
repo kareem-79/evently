@@ -153,7 +153,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get event_title => 'Event Title';
 
   @override
-  String get title_required => 'Title is required';
+  String get title_required => 'Title is Required';
 
   @override
   String get description => 'Description';
@@ -162,7 +162,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get event_description => 'Event Description';
 
   @override
-  String get description_required => 'Description is required';
+  String get description_required => 'Description is Required';
 
   @override
   String get event_date => 'Event Date';
@@ -245,4 +245,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get event_added => 'The event has been added.';
+
+  @override
+  String get event_details => 'Event Details';
+
+  @override
+  String get tap_on_location_to_select => 'Tap on Location To Select';
+
+  @override
+  String get edit_event => 'Edit Event';
+
+  @override
+  String get update_event => 'Update Event';
 }

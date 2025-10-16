@@ -107,6 +107,7 @@ class ThemeManager {
         color: ColorsManager.gray,
         fontWeight: FontWeight.w400,
       ),
+
       prefixIconColor: ColorsManager.gray,
       suffixIconColor: ColorsManager.gray,
       enabledBorder: OutlineInputBorder(
@@ -328,12 +329,12 @@ class ThemeManager {
       ),
       headlineSmall: GoogleFonts.inter(
         fontSize: 14.sp,
-        color: ColorsManager.white,
+        color: ColorsManager.ofWhite,
         fontWeight: FontWeight.w400,
       ),
       headlineLarge: GoogleFonts.inter(
         fontSize: 24.sp,
-        color: ColorsManager.white,
+        color: ColorsManager.ofWhite,
         fontWeight: FontWeight.bold,
       ),
       headlineMedium: GoogleFonts.inter(
