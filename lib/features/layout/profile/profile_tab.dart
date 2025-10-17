@@ -105,7 +105,7 @@ class _ProfileTabState extends State<ProfileTab> {
             configProvider.changeAppLanguage(_mapLanguageToCode(context, newLanguage!));
           },
         ),
-        const Spacer(flex: 9),
+        const Spacer(flex: 8),
         Padding(
           padding: EdgeInsets.all(10.0.sp),
           child: ElevatedButton(
@@ -123,7 +123,7 @@ class _ProfileTabState extends State<ProfileTab> {
             ),
           ),
         ),
-        const Spacer(flex: 1),
+        const Spacer(flex: 2),
       ],
     );
   }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:evently/core/prefs_manager/prefs_manager.dart';
 import 'package:evently/core/resources/assets_manager.dart';
 import 'package:evently/core/resources/colors_manager.dart';
@@ -14,6 +16,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -44,12 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
     passwordController.dispose();
     super.dispose();
   }
-  // Future<void> saveLogin() async {
-  //   if(FirebaseAuth.instance.currentUser!=null){
-  //     UserModel.currentUser=await FirebaseService.getUserFromFireStore(FirebaseAuth.instance.currentUser!.uid);
-  //     Navigator.pushReplacementNamed(context, RoutesManager.mainLayout);
-  //   }
-  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -179,9 +177,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     side: BorderSide(color: ColorsManager.blue),
                   ),
-                  onPressed: () {},
+                  onPressed: () async {
+                    await signInWithGoogle();
+                    if (FirebaseAuth.instance.currentUser != null) {
+                      UserModel.currentUser =
+                          await FirebaseServices.getUserFromFireStore(
+                            FirebaseAuth.instance.currentUser!.uid,
+                          );
+                      _navigate();
+                    }
+                  },
                   child: Padding(
-                    padding: EdgeInsets.all(12.0.sp),
+                    padding: EdgeInsets.all(14.0.sp),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -220,18 +227,51 @@ class _LoginScreenState extends State<LoginScreen> {
         );
         UiUtils.hideDialog(context);
         _navigate();
-        UiUtils.showToast(AppLocalizations.of(context)!.login_success, Colors.green);
+        UiUtils.showToast(
+          AppLocalizations.of(context)!.login_success,
+          Colors.green,
+        );
       } on FirebaseAuthException catch (e) {
         UiUtils.hideDialog(context);
         UiUtils.showToast(
-          AppLocalizations.of(context)!.incorrect_credentials,ColorsManager.red
+          AppLocalizations.of(context)!.incorrect_credentials,
+          ColorsManager.red,
         );
       } catch (e) {
         UiUtils.hideDialog(context);
         UiUtils.showToast(
-          AppLocalizations.of(context)!.failed_login,ColorsManager.red
+          AppLocalizations.of(context)!.failed_login,
+          ColorsManager.red,
         );
       }
+    }
+  }
+
+  static Future<void> signInWithGoogle() async {
+    try {
+      final googleSignIn = GoogleSignIn.instance;
+      googleSignIn.initialize(
+        serverClientId:
+            "785408111977-5jefsfgeecrts898v1bjo3d6cfc8e362.apps.googleusercontent.com",
+      );
+      final GoogleSignInAccount? googleUser = await googleSignIn.authenticate();
+      if (googleUser == null) return ;
+      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+      );
+      UserCredential firebaseUsers = await FirebaseAuth.instance
+          .signInWithCredential(credential);
+      UserModel user = UserModel(
+        id: firebaseUsers.user?.uid ?? "",
+        email: firebaseUsers.user?.email ?? "",
+        name: firebaseUsers.user?.displayName ?? "",
+        favouriteEventIds: [],
+      );
+      await FirebaseServices.addUserToFirestore(user);
+    } catch (e) {
+      log(e.toString());
     }
   }
 
