@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:evently/core/prefs_manager/prefs_manager.dart';
 import 'package:evently/core/resources/assets_manager.dart';
 import 'package:evently/core/resources/colors_manager.dart';
@@ -16,7 +14,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -115,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 CustomElevatedButton(
-                  onPress: _login,
+                  onPress: login,
                   text: AppLocalizations.of(context)!.login,
                 ),
                 Padding(
@@ -178,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     side: BorderSide(color: ColorsManager.blue),
                   ),
                   onPressed: () async {
-                    await signInWithGoogle();
+                    await FirebaseServices.signInWithGoogle(context);
                     if (FirebaseAuth.instance.currentUser != null) {
                       UserModel.currentUser =
                           await FirebaseServices.getUserFromFireStore(
@@ -214,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future<void> _login() async {
+  Future<void> login() async {
     if (formKey.currentState?.validate() ?? false) {
       try {
         UiUtils.showLoadingDialog(context);
@@ -247,33 +245,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  static Future<void> signInWithGoogle() async {
-    try {
-      final googleSignIn = GoogleSignIn.instance;
-      googleSignIn.initialize(
-        serverClientId:
-            "785408111977-76of9ufbpsbpoh3ucsbs8ogm783hq4mi.apps.googleusercontent.com",
-      );
-      final GoogleSignInAccount? googleUser = await googleSignIn.authenticate();
-      if (googleUser == null) return ;
-      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
 
-      final OAuthCredential credential = GoogleAuthProvider.credential(
-        idToken: googleAuth.idToken,
-      );
-      UserCredential firebaseUsers = await FirebaseAuth.instance
-          .signInWithCredential(credential);
-      UserModel user = UserModel(
-        id: firebaseUsers.user?.uid ?? "",
-        email: firebaseUsers.user?.email ?? "",
-        name: firebaseUsers.user?.displayName ?? "",
-        favouriteEventIds: [],
-      );
-      await FirebaseServices.addUserToFirestore(user);
-    } catch (e) {
-      log(e.toString());
-    }
-  }
 
   _navigate() async {
     bool hasEnteredBefore = await PrefsManager.checkEntering();

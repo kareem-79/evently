@@ -6,6 +6,12 @@ import 'package:evently/model/event_model.dart';
 import 'package:evently/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+import '../core/resources/colors_manager.dart';
+import '../core/utils/ui_utils.dart';
+import '../l10n/app_localizations.dart';
 
 class FirebaseServices {
   static Future<UserCredential> register(String email, String password) async {
@@ -162,6 +168,42 @@ class FirebaseServices {
     await userDocument.update({
       'favouriteEventIds': currentUser.favouriteEventIds,
     });
+  }
+  static Future<void> signInWithGoogle(BuildContext context) async {
+    try {
+      final googleSignIn = GoogleSignIn.instance;
+      googleSignIn.initialize(
+        serverClientId:
+        "785408111977-76of9ufbpsbpoh3ucsbs8ogm783hq4mi.apps.googleusercontent.com",
+      );
+      final GoogleSignInAccount? googleUser = await googleSignIn.authenticate();
+      if (googleUser == null) return ;
+      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+      );
+      UserCredential firebaseUsers = await FirebaseAuth.instance
+          .signInWithCredential(credential);
+      UserModel user = UserModel(
+        id: firebaseUsers.user?.uid ?? "",
+        email: firebaseUsers.user?.email ?? "",
+        name: firebaseUsers.user?.displayName ?? "",
+        favouriteEventIds: [],
+      );
+      UiUtils.showToast(
+        AppLocalizations.of(context)!.login_success,
+        Colors.green,
+      );
+      await FirebaseServices.addUserToFirestore(user);
+
+    } catch (e) {
+      log(e.toString());
+      UiUtils.showToast(
+        AppLocalizations.of(context)!.failed_login,
+        ColorsManager.red,
+      );
+    }
   }
 
 }
