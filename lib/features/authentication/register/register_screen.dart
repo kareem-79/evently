@@ -1,9 +1,14 @@
 import 'package:evently/core/resources/assets_manager.dart';
 import 'package:evently/core/resources/routes_manager.dart';
+import 'package:evently/core/utils/ui_utils.dart';
 import 'package:evently/core/utils/validation.dart';
 import 'package:evently/core/widget/custom_elevated_button.dart';
 import 'package:evently/core/widget/custom_text_button.dart';
 import 'package:evently/core/widget/custom_text_form_filed.dart';
+import 'package:evently/firebase/firebase_services.dart';
+import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/model/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,18 +21,20 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   late bool secure = true;
-  var formKey=GlobalKey<FormState>();
+  var formKey = GlobalKey<FormState>();
   late TextEditingController nameController;
   late TextEditingController emailController;
   late TextEditingController passwordController;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    nameController=TextEditingController();
-    emailController=TextEditingController();
-    passwordController=TextEditingController();
+    nameController = TextEditingController();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -41,7 +48,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Register")),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.register),
+        elevation: 0,
+      ),
       body: Form(
         key: formKey,
         child: SingleChildScrollView(
@@ -50,18 +60,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Image.asset(ImageAssets.eventlyLogo, height: 186.h, width: 136.w),
+                Image.asset(
+                  ImageAssets.eventlyLogo,
+                  height: 186.h,
+                  width: 136.w,
+                ),
                 SizedBox(height: 24.h),
                 CustomTextFormFiled(
                   controller: nameController,
-                  label: "Name",
+                  label: AppLocalizations.of(context)!.name,
                   prefixIcon: Icons.person,
                   validator: (input) {
-                    if(input==null||input.trim().isEmpty){
-                      return "Name is Required";
-                    }
-                    if(input.length<5){
-                      return "Sorry,Name should be at least 6 char";
+                    if (input == null || input.trim().isEmpty) {
+                      return AppLocalizations.of(context)!.name_required;
                     }
                     return null;
                   },
@@ -69,14 +80,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 CustomTextFormFiled(
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
-                  label: "E-mail",
+                  label: AppLocalizations.of(context)!.email,
                   prefixIcon: Icons.email,
                   validator: (input) {
-                    if(input==null||input.trim().isEmpty){
-                      return "E-mail is Required";
+                    if (input == null || input.trim().isEmpty) {
+                      return AppLocalizations.of(context)!.email_required;
                     }
-                    if(!Validation.isValidateEmail(input)){
-                      return "E-mail is not validate";
+                    if (!Validation.isValidateEmail(input)) {
+                      return AppLocalizations.of(context)!.email_invalid;
                     }
                     return null;
                   },
@@ -84,28 +95,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 CustomTextFormFiled(
                   controller: passwordController,
                   validator: (input) {
-                    if(input==null||input.trim().isEmpty){
-                      return "Password is Required";
-                    }
-                    if(input.length<8){
-                      return "Sorry,Password should be at least 8 char";
+                    if (input == null || input.trim().isEmpty) {
+                      return AppLocalizations.of(context)!.password_required;
                     }
                     return null;
                   },
                   secure: secure,
-                  label: "Password",
+                  label: AppLocalizations.of(context)!.password,
                   prefixIcon: Icons.lock,
                   suffixIcon: IconButton(
                     onPressed: () {
                       secure = !secure;
                       setState(() {});
                     },
-                    icon: Icon(secure ? Icons.visibility_off : Icons.visibility),
+                    icon: Icon(
+                      secure ? Icons.visibility_off : Icons.visibility,
+                    ),
                   ),
                 ),
                 CustomElevatedButton(
                   onPress: _createAccount,
-                  text: "Create Account",
+                  text: AppLocalizations.of(context)!.create_account,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.sp),
@@ -113,9 +123,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Already Have Account ? ",
+                        AppLocalizations.of(context)!.already_have_account,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
+                      SizedBox(width: 2.w),
                       CustomTextButton(
                         onPress: () {
                           Navigator.pushReplacementNamed(
@@ -123,7 +134,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             RoutesManager.login,
                           );
                         },
-                        text: "Login",
+                        text: AppLocalizations.of(context)!.login,
                       ),
                     ],
                   ),
@@ -136,10 +147,48 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  void _createAccount() {
+  Future<void> _createAccount() async {
     if (formKey.currentState?.validate() ?? false) {
-      print("Now create account...");
+      try {
+        UiUtils.showLoadingDialog(context);
+        UserCredential credential = await FirebaseServices.register(
+          emailController.text,
+          passwordController.text,
+        );
+        await FirebaseServices.addUserToFirestore(
+          UserModel(
+            id: credential.user!.uid,
+            name: nameController.text,
+            email: emailController.text,
+            favouriteEventIds: [],
+          ),
+        );
+        UiUtils.hideDialog(context);
+        Navigator.pushReplacementNamed(context, RoutesManager.login);
+        UiUtils.showToast(
+          AppLocalizations.of(context)!.create_account,
+          Colors.green,
+        );
+      } on FirebaseAuthException catch (e) {
+        UiUtils.hideDialog(context);
+        if (e.code == 'weak-password') {
+          UiUtils.showToast(
+            AppLocalizations.of(context)!.weak_password,
+            Colors.red,
+          );
+        } else if (e.code == 'email-already-in-use') {
+          UiUtils.showToast(
+            AppLocalizations.of(context)!.account_exists,
+            Colors.red,
+          );
+        }
+      } catch (e) {
+        UiUtils.hideDialog(context);
+        UiUtils.showToast(
+          AppLocalizations.of(context)!.failed_register,
+          Colors.red,
+        );
+      }
     }
   }
-
 }
