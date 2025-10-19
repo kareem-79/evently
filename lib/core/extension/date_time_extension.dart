@@ -9,6 +9,10 @@ extension DateTimeExtendion on DateTime{
     DateFormat pattern=DateFormat("dd/MM/yyyy");
     return pattern.format(this);
   }
+  String get toViewData{
+    DateFormat pattern=DateFormat("dd MMMM yyyy");
+    return pattern.format(this);
+  }
   String get toFormatTime{
     DateFormat pattern=DateFormat("jm");
     return pattern.format(this);

@@ -143,7 +143,9 @@ class FirebaseServices {
     }
   }
 
-  static Future<List<EventModel>>getFavouriteEvents(BuildContext context) async {
+  static Future<List<EventModel>> getFavouriteEvents(
+    BuildContext context,
+  ) async {
     CollectionReference<EventModel> eventCollection = getEventCollection(
       context,
     );
@@ -159,25 +161,29 @@ class FirebaseServices {
         .toList();
     return favouriteEvents;
   }
+
   static Future<void> removeEventFromFavorite(EventModel event) async {
     if (UserModel.currentUser == null) return;
     UserModel currentUser = UserModel.currentUser!;
     currentUser.favouriteEventIds.remove(event.id);
     CollectionReference<UserModel> userCollection = getUserCollection();
-    DocumentReference<UserModel> userDocument = userCollection.doc(currentUser.id);
+    DocumentReference<UserModel> userDocument = userCollection.doc(
+      currentUser.id,
+    );
     await userDocument.update({
       'favouriteEventIds': currentUser.favouriteEventIds,
     });
   }
+
   static Future<void> signInWithGoogle(BuildContext context) async {
     try {
       final googleSignIn = GoogleSignIn.instance;
       googleSignIn.initialize(
         serverClientId:
-        "785408111977-76of9ufbpsbpoh3ucsbs8ogm783hq4mi.apps.googleusercontent.com",
+            "785408111977-76of9ufbpsbpoh3ucsbs8ogm783hq4mi.apps.googleusercontent.com",
       );
       final GoogleSignInAccount? googleUser = await googleSignIn.authenticate();
-      if (googleUser == null) return ;
+      if (googleUser == null) return;
       final GoogleSignInAuthentication googleAuth = googleUser.authentication;
 
       final OAuthCredential credential = GoogleAuthProvider.credential(
@@ -191,12 +197,12 @@ class FirebaseServices {
         name: firebaseUsers.user?.displayName ?? "",
         favouriteEventIds: [],
       );
+      UiUtils.showLoadingDialog(context);
       UiUtils.showToast(
         AppLocalizations.of(context)!.login_success,
         Colors.green,
       );
       await FirebaseServices.addUserToFirestore(user);
-
     } catch (e) {
       log(e.toString());
       UiUtils.showToast(
@@ -206,4 +212,14 @@ class FirebaseServices {
     }
   }
 
+  static Future<void> deleteEvent(
+    EventModel event,
+    BuildContext context,
+  ) async {
+    CollectionReference<EventModel> eventCollection = getEventCollection(
+      context,
+    );
+    DocumentReference<EventModel> eventDocument = eventCollection.doc(event.id);
+    return eventDocument.delete();
+  }
 }

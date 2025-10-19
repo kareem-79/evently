@@ -15,7 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -244,8 +243,6 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     }
   }
-
-
 
   _navigate() async {
     bool hasEnteredBefore = await PrefsManager.checkEntering();

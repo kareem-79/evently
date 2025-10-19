@@ -58,7 +58,7 @@ class _MapTabState extends State<MapTab> {
             top: MediaQuery.sizeOf(context).height * .75,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.all(16.sp),
+              padding: EdgeInsets.all(8.sp),
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {

@@ -12,6 +12,7 @@ class ThemeManager {
     useMaterial3: false,
     iconTheme: IconThemeData(color: ColorsManager.black),
     appBarTheme: AppBarTheme(
+      elevation: 0,
       backgroundColor: ColorsManager.whiteBlue,
       foregroundColor: ColorsManager.blue,
       titleTextStyle: GoogleFonts.roboto(
@@ -201,6 +202,7 @@ class ThemeManager {
     useMaterial3: false,
     iconTheme: IconThemeData(color: ColorsManager.ofWhite),
     appBarTheme: AppBarTheme(
+      elevation: 0,
       backgroundColor: ColorsManager.darkBlue,
       foregroundColor: ColorsManager.blue,
       titleTextStyle: GoogleFonts.roboto(
