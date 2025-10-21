@@ -257,4 +257,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get update_event => 'Update Event';
+
+  @override
+  String get the_event_has_been_deleted => 'The event has been deleted.';
 }

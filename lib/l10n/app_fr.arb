@@ -83,5 +83,6 @@
   "event_details": "Détails de l'événement",
   "tap_on_location_to_select": "Appuyez sur l'emplacement pour sélectionner",
   "edit_event": "Modifier l'événement",
-  "update_event": "Mettre à jour l'événement"
+  "update_event": "Mettre à jour l'événement",
+  "the_event_has_been_deleted": "L'événement a été supprimé."
 }

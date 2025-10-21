@@ -80,6 +80,6 @@
   "event_details": "Event Details",
   "tap_on_location_to_select": "Tap on Location To Select",
   "edit_event": "Edit Event",
-  "update_event": "Update Event"
-
+  "update_event": "Update Event",
+  "the_event_has_been_deleted": "The event has been deleted."
 }

@@ -1,34 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'custom_tap_item.dart';
 import '../../model/category_model.dart';
 
 class CustomTapBar extends StatefulWidget {
   final List<CategoryModel> categories;
+  int selectedCategoryIndex;
   final Color selectedBgColor;
   final Color selectedFgColor;
   final Color unSelectedBgColor;
   final Color unSelectedFgColor;
   final void Function(CategoryModel)? onCategoryItemSelected;
 
-  const CustomTapBar({
+   CustomTapBar({
     super.key,
     required this.categories,
     required this.selectedBgColor,
     required this.selectedFgColor,
     required this.unSelectedBgColor,
     required this.unSelectedFgColor,
-    this.onCategoryItemSelected,
+    this.onCategoryItemSelected, required this.selectedCategoryIndex,
   });
 
   @override
   State<CustomTapBar> createState() => _CustomTapBarState();
 }
-
 class _CustomTapBarState extends State<CustomTapBar> {
-  int selectedIndex = 0;
-
+  int selectedIndex=0;
+  @override
+  void initState() {
+    selectedIndex = widget.selectedCategoryIndex;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

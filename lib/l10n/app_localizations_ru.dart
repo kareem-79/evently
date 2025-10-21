@@ -260,4 +260,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get update_event => 'Обновить событие';
+
+  @override
+  String get the_event_has_been_deleted => 'Событие было удалено.';
 }

@@ -257,4 +257,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get update_event => 'イベントを更新';
+
+  @override
+  String get the_event_has_been_deleted => 'イベントが削除されました。';
 }

@@ -104,6 +104,7 @@ class _HomeTabState extends State<HomeTab> {
                   ),
                   SizedBox(height: 10.h),
                   CustomTapBar(
+                    selectedCategoryIndex: 0,
                     onCategoryItemSelected: (category) {
                       setState(() {
                         selectedCategory = category;

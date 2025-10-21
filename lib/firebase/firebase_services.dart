@@ -5,7 +5,6 @@ import 'package:evently/model/category_model.dart';
 import 'package:evently/model/event_model.dart';
 import 'package:evently/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -31,9 +30,9 @@ class FirebaseServices {
     CollectionReference<UserModel> userCollection = dp
         .collection("Users")
         .withConverter<UserModel>(
-          fromFirestore: (snapshot, _) => UserModel.fromJson(snapshot.data()!),
-          toFirestore: (user, _) => user.toJson(),
-        );
+      fromFirestore: (snapshot, _) => UserModel.fromJson(snapshot.data()!),
+      toFirestore: (user, _) => user.toJson(),
+    );
     return userCollection;
   }
 
@@ -57,23 +56,20 @@ class FirebaseServices {
   }
 
   static CollectionReference<EventModel> getEventCollection(
-    BuildContext context,
-  ) {
+      BuildContext context,) {
     FirebaseFirestore dp = FirebaseFirestore.instance;
     CollectionReference<EventModel> eventCollection = dp
         .collection("Events")
         .withConverter<EventModel>(
-          fromFirestore: (snapshot, _) =>
-              EventModel.fromJson(snapshot.data()!, context),
-          toFirestore: (event, _) => event.toJson(),
-        );
+      fromFirestore: (snapshot, _) =>
+          EventModel.fromJson(snapshot.data()!, context),
+      toFirestore: (event, _) => event.toJson(),
+    );
     return eventCollection;
   }
 
-  static Future<void> addEventToFireStore(
-    EventModel event,
-    BuildContext context,
-  ) {
+  static Future<void> addEventToFireStore(EventModel event,
+      BuildContext context,) {
     CollectionReference<EventModel> eventCollection = getEventCollection(
       context,
     );
@@ -82,10 +78,8 @@ class FirebaseServices {
     return eventDocument.set(event);
   }
 
-  static Future<List<EventModel>> getEvents(
-    BuildContext context,
-    CategoryModel? category,
-  ) async {
+  static Future<List<EventModel>> getEvents(BuildContext context,
+      CategoryModel? category,) async {
     CollectionReference<EventModel> eventCollection = getEventCollection(
       context,
     );
@@ -106,9 +100,8 @@ class FirebaseServices {
   }
 
   static Stream<List<EventModel>> getEventsWithRealTimeUpdates(
-    BuildContext context,
-    CategoryModel category,
-  ) async* {
+      BuildContext context,
+      CategoryModel category,) async* {
     CollectionReference<EventModel> eventCollection = getEventCollection(
       context,
     );
@@ -121,7 +114,7 @@ class FirebaseServices {
     var snapshots = query.snapshots();
 
     yield* snapshots.map(
-      (snapshot) =>
+          (snapshot) =>
           snapshot.docs.map((docSnapshot) => docSnapshot.data()).toList(),
     );
   }
@@ -144,8 +137,7 @@ class FirebaseServices {
   }
 
   static Future<List<EventModel>> getFavouriteEvents(
-    BuildContext context,
-  ) async {
+      BuildContext context,) async {
     CollectionReference<EventModel> eventCollection = getEventCollection(
       context,
     );
@@ -156,8 +148,8 @@ class FirebaseServices {
     List<EventModel> favouriteEvents = events
         .where(
           (event) =>
-              UserModel.currentUser!.favouriteEventIds.contains(event.id),
-        )
+          UserModel.currentUser!.favouriteEventIds.contains(event.id),
+    )
         .toList();
     return favouriteEvents;
   }
@@ -180,7 +172,7 @@ class FirebaseServices {
       final googleSignIn = GoogleSignIn.instance;
       googleSignIn.initialize(
         serverClientId:
-            "785408111977-76of9ufbpsbpoh3ucsbs8ogm783hq4mi.apps.googleusercontent.com",
+        "785408111977-76of9ufbpsbpoh3ucsbs8ogm783hq4mi.apps.googleusercontent.com",
       );
       final GoogleSignInAccount? googleUser = await googleSignIn.authenticate();
       if (googleUser == null) return;
@@ -212,14 +204,21 @@ class FirebaseServices {
     }
   }
 
-  static Future<void> deleteEvent(
-    EventModel event,
-    BuildContext context,
-  ) async {
+  static Future<void> deleteEvent(EventModel event,
+      BuildContext context,) async {
     CollectionReference<EventModel> eventCollection = getEventCollection(
       context,
     );
     DocumentReference<EventModel> eventDocument = eventCollection.doc(event.id);
     return eventDocument.delete();
+  }
+
+  static Future<void> updateEvent(EventModel event,
+      BuildContext context) async {
+    CollectionReference<EventModel> collection = getEventCollection(
+      context,
+    );
+    DocumentReference<EventModel> document = collection.doc(event.id);
+    return await document.update(event.toJson());
   }
 }

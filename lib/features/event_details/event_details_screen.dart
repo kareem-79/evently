@@ -1,5 +1,7 @@
 import 'package:evently/core/extension/date_time_extension.dart';
 import 'package:evently/core/resources/colors_manager.dart';
+import 'package:evently/core/resources/routes_manager.dart';
+import 'package:evently/core/utils/ui_utils.dart';
 import 'package:evently/features/event_details/widgets/event_location_and_date_card.dart';
 import 'package:evently/features/event_details/widgets/map_card.dart';
 import 'package:evently/firebase/firebase_services.dart';
@@ -26,7 +28,7 @@ class EventDetailsScreen extends StatelessWidget {
             visible: FirebaseAuth.instance.currentUser?.uid==event.ownerId,
             child: IconButton(
               onPressed: () {
-
+                Navigator.pushNamed(context,RoutesManager.createEvent, arguments: event);
               },
               icon: Icon(
                 Icons.mode_edit_outline_outlined,
@@ -40,6 +42,7 @@ class EventDetailsScreen extends StatelessWidget {
               onPressed: () {
                 FirebaseServices.deleteEvent(event, context);
                 Navigator.pop(context);
+                UiUtils.showToast(localization.the_event_has_been_deleted, Colors.green);
               },
               icon: Icon(Icons.delete_outline, color: ColorsManager.red),
             ),

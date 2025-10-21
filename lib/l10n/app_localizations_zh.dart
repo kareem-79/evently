@@ -256,4 +256,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get update_event => '更新活动';
+
+  @override
+  String get the_event_has_been_deleted => '事件已被删除。';
 }

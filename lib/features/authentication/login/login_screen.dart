@@ -10,10 +10,13 @@ import 'package:evently/core/widget/custom_text_form_filed.dart';
 import 'package:evently/firebase/firebase_services.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/model/user_model.dart';
+import 'package:evently/provider/config_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -30,16 +33,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    //saveLogin();
     emailController = TextEditingController();
     passwordController = TextEditingController();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -47,6 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var configProvider = Provider.of<ConfigProvider>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -105,7 +106,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       CustomTextButton(
-                        onPress: () {},
+                        onPress: () {
+                          Navigator.pushNamed(
+                            context,
+                            RoutesManager.resetPasswordScreen,arguments: UserModel(
+                            id: '',
+                            name: '',
+                            email: emailController.text.trim(),
+                            favouriteEventIds: [],
+                          ),
+                          );
+                        },
                         text: AppLocalizations.of(context)!.forget_password,
                       ),
                     ],
@@ -134,6 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         text: AppLocalizations.of(context)!.create_account,
                       ),
+
                     ],
                   ),
                 ),
@@ -200,6 +212,44 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 24.h,),
+                Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      border: Border.all(color: ColorsManager.blue)
+                    ),
+                    child: ToggleSwitch(
+                      minWidth: 60,
+                      cornerRadius: 30,
+                      curve: Curves.easeOutQuart,
+                      animate: true,
+                      animationDuration: 300,
+                      initialLabelIndex:
+                      configProvider.appLanguageCode == "ar" ? 1 : 0,
+                      totalSwitches: 2,
+                      customWidgets: [
+                        Image.asset(ImageAssets.lr, width: 30),
+                        Image.asset(ImageAssets.eg, width: 30),
+                      ],
+                      activeBgColor: [
+                        Theme.of(context).secondaryHeaderColor,
+                      ],
+                      inactiveBgColor: Theme.of(context).shadowColor,
+                      radiusStyle: true,
+                      borderWidth: 1,
+                      borderColor: [Colors.transparent],
+                      onToggle: (index) {
+                        if (index == 0) {
+                          configProvider.changeAppLanguage("en");
+                        } else {
+                          configProvider.changeAppLanguage("ar");
+                        }
+                        setState(() {});
+                      },
                     ),
                   ),
                 ),

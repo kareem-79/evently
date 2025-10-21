@@ -57,13 +57,13 @@ class CategoryModel {
         id: "6",
         name: AppLocalizations.of(context)!.holiday,
         iconData: Icons.holiday_village_rounded,
-        imagePath: ImageAssets.meeting,
+        imagePath: ImageAssets.holiday,
       ),
       CategoryModel(
         id: "7",
         name: AppLocalizations.of(context)!.exhibition,
         iconData: Icons.water_damage_rounded,
-        imagePath: ImageAssets.holiday,
+        imagePath: ImageAssets.exhibition,
       ),
       CategoryModel(
         id: "8",
@@ -80,7 +80,6 @@ class CategoryModel {
     ];
   }
 
-  // الصور اللي بتظهر في صفحة إنشاء الحدث (Create Event)
   static List<CategoryModel> category(BuildContext context) {
     return [
       CategoryModel(
@@ -117,13 +116,13 @@ class CategoryModel {
         id: "6",
         name: AppLocalizations.of(context)!.holiday,
         iconData: Icons.holiday_village_rounded,
-        imagePath: CreateEventAssets.meeting,
+        imagePath: CreateEventAssets.holiday,
       ),
       CategoryModel(
         id: "7",
         name: AppLocalizations.of(context)!.exhibition,
         iconData: Icons.water_damage_rounded,
-        imagePath: CreateEventAssets.holiday,
+        imagePath: CreateEventAssets.exhibition,
       ),
       CategoryModel(
         id: "8",

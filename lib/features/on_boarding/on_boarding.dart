@@ -29,7 +29,6 @@ class _OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
     var configProvider = Provider.of<ConfigProvider>(context);
-
     return IntroductionScreen(
       key: introKey,
       autoScrollDuration: 20000,
@@ -47,7 +46,6 @@ class _OnBoardingState extends State<OnBoarding> {
                 SizedBox(height: 20.h),
                 Image.asset(ImageAssets.onBoarding1),
                 SizedBox(height: 20.h),
-
                 Text(
                   AppLocalizations.of(context)!.personalize_title,
                   style: Theme.of(context).textTheme.titleMedium,

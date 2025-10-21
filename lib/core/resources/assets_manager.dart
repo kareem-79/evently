@@ -18,6 +18,7 @@ abstract class ImageAssets{
   static const String onBoarding4="$base/on_boarding4.png";
   static const String lr="$base/LR.png";
   static const String eg="$base/EG.png";
+  static const String resetPassword="$base/reset_password.png";
 }
 abstract class CreateEventAssets{
   static const String base="assets/create_event_images";
@@ -25,7 +26,7 @@ abstract class CreateEventAssets{
   static const String birthday="$base/birthday.png";
   static const String bookclub="$base/bookclub.png";
   static const String eating="$base/eating.png";
-  static const String exhibition="$base/exhibition.png";
+  static const String exhibition="$base/exhibitiont.png";
   static const String football="$base/sports.png";
   static const String gaming="$base/gaming.png";
   static const String holiday="$base/holiday.png";

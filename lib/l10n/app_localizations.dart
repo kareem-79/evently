@@ -599,6 +599,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Update Event'**
   String get update_event;
+
+  /// No description provided for @the_event_has_been_deleted.
+  ///
+  /// In en, this message translates to:
+  /// **'The event has been deleted.'**
+  String get the_event_has_been_deleted;
 }
 
 class _AppLocalizationsDelegate

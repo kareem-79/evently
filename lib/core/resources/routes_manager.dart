@@ -5,7 +5,9 @@ import 'package:evently/features/event_details/event_details_screen.dart';
 import 'package:evently/features/layout/main_layout.dart';
 import 'package:evently/features/layout/map/pick_location_screen.dart';
 import 'package:evently/features/on_boarding/on_boarding.dart';
+import 'package:evently/features/reset_password/reset_password.dart';
 import 'package:evently/model/event_model.dart';
+import 'package:evently/model/user_model.dart';
 import 'package:evently/provider/create_event_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +20,7 @@ class RoutesManager {
   static const String createEvent = "/CreateEvent";
   static const String pickLocationScreen = "/PickLocationScreen";
   static const String eventDetailsScreen = "/EventDetailsScreen";
+  static const String resetPasswordScreen = "/ResetPasswordScreen";
 
   static Route? getRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -40,10 +43,15 @@ class RoutesManager {
       case createEvent:
         {
           return CupertinoPageRoute(
-            builder: (context) => ChangeNotifierProvider(
-              create: (context) => CreateEventProvider(),
-              child: CreateEvent(),
-            ),
+            settings: settings,
+            builder: (context) {
+              EventModel? event =
+              ModalRoute.of(context)?.settings.arguments as EventModel?;
+              return ChangeNotifierProvider(
+                create: (context) => CreateEventProvider(),
+                child: CreateEvent(event: event),
+              );
+            }
           );
         }
       case pickLocationScreen:
@@ -62,10 +70,22 @@ class RoutesManager {
         return CupertinoPageRoute(
           settings: settings,
           builder: (context) {
-            EventModel event = ModalRoute.of(context)?.settings.arguments as EventModel;
+            EventModel event =
+                ModalRoute.of(context)?.settings.arguments as EventModel;
             return EventDetailsScreen(event: event);
           },
         );
+      case resetPasswordScreen:
+        {
+          return CupertinoPageRoute(
+            settings: settings,
+            builder: (context) {
+              UserModel user =
+                  ModalRoute.of(context)?.settings.arguments as UserModel;
+              return ResetPassword(user: user);
+            },
+          );
+        }
     }
   }
 }

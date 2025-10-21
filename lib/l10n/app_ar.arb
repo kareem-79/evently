@@ -83,5 +83,6 @@
   "event_details": "تفاصيل الحدث",
   "tap_on_location_to_select": "اضغط على الموقع للاختيار",
   "edit_event": "تعديل الحدث",
-  "update_event": "تحديث الحدث"
+  "update_event": "تحديث الحدث",
+  "the_event_has_been_deleted": "تم حذف الحدث."
 }

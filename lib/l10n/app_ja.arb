@@ -83,5 +83,6 @@
   "event_details": "イベントの詳細",
   "tap_on_location_to_select": "場所をタップして選択",
   "edit_event": "イベントを編集",
-  "update_event": "イベントを更新"
+  "update_event": "イベントを更新",
+  "the_event_has_been_deleted": "イベントが削除されました。"
 }

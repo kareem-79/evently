@@ -24,6 +24,8 @@ class CreateEventProvider extends ChangeNotifier {
   Set<Marker> markers = {};
   late GoogleMapController googleMapController;
   late CategoryModel selectedCategory;
+  String? imagePath;
+
   CameraPosition cameraPosition = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 17,
@@ -31,6 +33,12 @@ class CreateEventProvider extends ChangeNotifier {
 
   void getSelectedCategory(BuildContext context) {
     selectedCategory = CategoryModel.category(context)[0];
+  }
+
+  changeSelectedCategory(CategoryModel category) {
+    selectedCategory = category;
+    imagePath = category.imagePath;
+    notifyListeners();
   }
 
   Future<void> addEvent(BuildContext context) async {
@@ -43,10 +51,10 @@ class CreateEventProvider extends ChangeNotifier {
       title: titleController.text,
       description: descriptionController.text,
       dateTime: selectedDate,
-      latitude:eventLocation?.latitude??0 ,
-      longitude: eventLocation?.longitude??0,
-      city: city??"unKnown",
-      country:country??"unKnown"
+      latitude: eventLocation?.latitude ?? 0,
+      longitude: eventLocation?.longitude ?? 0,
+      city: city ?? "unKnown",
+      country: country ?? "unKnown",
     );
     await FirebaseServices.addEventToFireStore(event, context);
     UiUtils.hideDialog(context);
@@ -149,6 +157,47 @@ class CreateEventProvider extends ChangeNotifier {
     markers.clear();
     markers.add(Marker(markerId: MarkerId("1"), position: location));
     notifyListeners();
+  }
+
+  int selectedCategoryIndex = 0;
+  EventModel? eventModel;
+
+  void initEventData(EventModel? event, BuildContext context) {
+    if (event != null) {
+      eventModel = event;
+      titleController.text = event.title;
+      descriptionController.text = event.description;
+      selectedCategory = event.category;
+      selectedDate = event.dateTime;
+      selectedTime = TimeOfDay.fromDateTime(event.dateTime);
+      imagePath = event.category.imagePath;
+      eventLocation = LatLng(event.latitude, event.longitude);
+      city = event.city;
+      country = event.country;
+      selectedCategoryIndex = CategoryModel.category(
+        context,
+      ).indexWhere((category) => category.id == event.category.id);
+    }
+  }
+
+  Future<void> updateEvent(BuildContext context) async {
+    if (formKey.currentState?.validate() == false) return;
+    UiUtils.showLoadingDialog(context);
+    eventModel?.ownerId = UserModel.currentUser!.id;
+    eventModel?.category = CategoryModel.category(
+      context,
+    )[selectedCategoryIndex];
+    eventModel?.title = titleController.text;
+    eventModel?.description = descriptionController.text;
+    eventModel?.dateTime = selectedDate;
+    eventModel?.latitude = eventLocation?.latitude ?? 0;
+    eventModel?.longitude = eventLocation?.longitude ?? 0;
+    eventModel?.city = city ?? "unKnown";
+    eventModel?.country = country ?? "unKnown";
+    await FirebaseServices.updateEvent(eventModel!, context);
+    UiUtils.hideDialog(context);
+    Navigator.pop(context);
+    UiUtils.showToast(AppLocalizations.of(context)!.edit_event, Colors.green);
   }
 
   @override

@@ -258,4 +258,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get update_event => 'تحديث الحدث';
+
+  @override
+  String get the_event_has_been_deleted => 'تم حذف الحدث.';
 }
