@@ -1,12 +1,27 @@
 import 'package:evently/features/authentication/login/login_screen.dart';
 import 'package:evently/features/authentication/register/register_screen.dart';
+import 'package:evently/features/create_event/create_event.dart';
+import 'package:evently/features/event_details/event_details_screen.dart';
 import 'package:evently/features/layout/main_layout.dart';
+import 'package:evently/features/layout/map/pick_location_screen.dart';
+import 'package:evently/features/on_boarding/on_boarding.dart';
+import 'package:evently/features/reset_password/reset_password.dart';
+import 'package:evently/model/event_model.dart';
+import 'package:evently/model/user_model.dart';
+import 'package:evently/provider/create_event_provider.dart';
+import 'package:evently/provider/home_provider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 class RoutesManager {
   static const String register = "/register";
   static const String login = "/Login";
+  static const String onBoarding = "OnBoarding";
   static const String mainLayout = "/MainLayout";
+  static const String createEvent = "/CreateEvent";
+  static const String pickLocationScreen = "/PickLocationScreen";
+  static const String eventDetailsScreen = "/EventDetailsScreen";
+  static const String resetPasswordScreen = "/ResetPasswordScreen";
 
   static Route? getRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -18,9 +33,64 @@ class RoutesManager {
         {
           return CupertinoPageRoute(builder: (context) => LoginScreen());
         }
+      case onBoarding:
+        {
+          return CupertinoPageRoute(builder: (context) => OnBoarding());
+        }
       case mainLayout:
         {
-          return CupertinoPageRoute(builder: (context) => MainLayout());
+          return CupertinoPageRoute(
+            builder: (context) => ChangeNotifierProvider(
+              create: (context) => HomeProvider(),
+              child: MainLayout(),
+            ),
+          );
+        }
+      case createEvent:
+        {
+          return CupertinoPageRoute(
+            settings: settings,
+            builder: (context) {
+              EventModel? event =
+              ModalRoute.of(context)?.settings.arguments as EventModel?;
+              return ChangeNotifierProvider(
+                create: (context) => CreateEventProvider(),
+                child: CreateEvent(event: event),
+              );
+            }
+          );
+        }
+      case pickLocationScreen:
+        {
+          return CupertinoPageRoute(
+            settings: settings,
+            builder: (context) {
+              CreateEventProvider provider =
+                  ModalRoute.of(context)?.settings.arguments
+                      as CreateEventProvider;
+              return PickLocationScreen(provider: provider);
+            },
+          );
+        }
+      case eventDetailsScreen:
+        return CupertinoPageRoute(
+          settings: settings,
+          builder: (context) {
+            EventModel event =
+                ModalRoute.of(context)?.settings.arguments as EventModel;
+            return EventDetailsScreen(event: event);
+          },
+        );
+      case resetPasswordScreen:
+        {
+          return CupertinoPageRoute(
+            settings: settings,
+            builder: (context) {
+              UserModel user =
+                  ModalRoute.of(context)?.settings.arguments as UserModel;
+              return ResetPassword(user: user);
+            },
+          );
         }
     }
   }
