@@ -9,6 +9,7 @@ import 'package:evently/features/reset_password/reset_password.dart';
 import 'package:evently/model/event_model.dart';
 import 'package:evently/model/user_model.dart';
 import 'package:evently/provider/create_event_provider.dart';
+import 'package:evently/provider/home_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
@@ -38,7 +39,12 @@ class RoutesManager {
         }
       case mainLayout:
         {
-          return CupertinoPageRoute(builder: (context) => MainLayout());
+          return CupertinoPageRoute(
+            builder: (context) => ChangeNotifierProvider(
+              create: (context) => HomeProvider(),
+              child: MainLayout(),
+            ),
+          );
         }
       case createEvent:
         {

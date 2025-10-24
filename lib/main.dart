@@ -4,6 +4,7 @@ import 'package:evently/core/resources/routes_manager.dart';
 import 'package:evently/firebase/firebase_services.dart';
 import 'package:evently/model/user_model.dart';
 import 'package:evently/provider/config_provider.dart';
+import 'package:evently/provider/home_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -28,9 +29,12 @@ void main() async {
   final configProvider = ConfigProvider();
   await configProvider.loadSavedSettings();
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => configProvider,
-      child: const Evently(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => HomeProvider()),
+        ChangeNotifierProvider(create: (context) => configProvider),
+      ],
+      child: Evently(),
     ),
   );
 }

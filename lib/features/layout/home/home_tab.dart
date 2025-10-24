@@ -1,13 +1,14 @@
 import 'package:evently/core/prefs_manager/prefs_manager.dart';
 import 'package:evently/core/resources/colors_manager.dart';
-import 'package:evently/core/widget/custom_tap_bar.dart';
 import 'package:evently/core/widget/custom_event_item.dart';
+import 'package:evently/core/widget/custom_tap_bar.dart';
 import 'package:evently/firebase/firebase_services.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/model/category_model.dart';
 import 'package:evently/model/event_model.dart';
 import 'package:evently/model/user_model.dart';
 import 'package:evently/provider/config_provider.dart';
+import 'package:evently/provider/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -20,17 +21,19 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  late CategoryModel selectedCategory = CategoryModel.categoryWithAll(
-    context,
-  )[0];
+  late CategoryModel selectedCategory = CategoryModel.categoryWithAll(context)[0];
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<HomeProvider>(context, listen: false).getUserLocation();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<HomeProvider>(context);
     var configProvider = Provider.of<ConfigProvider>(context);
     return Column(
       children: [
@@ -71,10 +74,10 @@ class _HomeTabState extends State<HomeTab> {
                               ),
                               SizedBox(width: 4.w),
                               Text(
-                                "Cairo,Egypt",
-                                style: Theme.of(
-                                  context,
-                                ).textTheme.headlineSmall,
+                                provider.locationMassage.isNotEmpty
+                                    ? provider.locationMassage
+                                    : "Fetching location...",
+                                style: Theme.of(context).textTheme.headlineSmall,
                               ),
                             ],
                           ),
@@ -83,23 +86,23 @@ class _HomeTabState extends State<HomeTab> {
                       Spacer(),
                       PrefsManager.getSavedTheme() == ThemeMode.dark
                           ? IconButton(
-                              onPressed: () {
-                                configProvider.changeAppTheme(ThemeMode.light);
-                              },
-                              icon: Icon(
-                                Icons.light_mode_outlined,
-                                color: ColorsManager.white,
-                              ),
-                            )
+                        onPressed: () {
+                          configProvider.changeAppTheme(ThemeMode.light);
+                        },
+                        icon: Icon(
+                          Icons.light_mode_outlined,
+                          color: ColorsManager.white,
+                        ),
+                      )
                           : IconButton(
-                              onPressed: () {
-                                configProvider.changeAppTheme(ThemeMode.dark);
-                              },
-                              icon: Icon(
-                                Icons.dark_mode_outlined,
-                                color: ColorsManager.white,
-                              ),
-                            ),
+                        onPressed: () {
+                          configProvider.changeAppTheme(ThemeMode.dark);
+                        },
+                        icon: Icon(
+                          Icons.dark_mode_outlined,
+                          color: ColorsManager.white,
+                        ),
+                      ),
                     ],
                   ),
                   SizedBox(height: 10.h),
@@ -131,19 +134,19 @@ class _HomeTabState extends State<HomeTab> {
               return Center(child: CircularProgressIndicator());
             }
             if (snapshot.hasError) {
-              return Center(child: Text(snapshot.hasError.toString()));
+              return Center(child: Text(snapshot.error.toString()));
             }
             List<EventModel> events = snapshot.data ?? [];
             return Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.zero,
                 itemCount: events.length,
-                itemBuilder: (context, index) => (EventItem(
+                itemBuilder: (context, index) => EventItem(
                   event: events[index],
                   isFavorite: UserModel.currentUser!.favouriteEventIds.contains(
                     events[index].id,
                   ),
-                )),
+                ),
               ),
             );
           },

@@ -18,7 +18,6 @@ class _MapTabState extends State<MapTab> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<MapProvider>().getEvents(context);
     });
-
     super.initState();
   }
 

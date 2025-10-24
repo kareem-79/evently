@@ -45,7 +45,8 @@ class ResetPassword extends StatelessWidget {
         SnackBar(content: Text('Password reset email sent!')),
       );
       log("Password reset link sent to: ${user.email}");
-    } catch (e) {
+    }  catch (e) {
+      log("$e");
       UiUtils.showToast("Error", ColorsManager.red);
     }
   }

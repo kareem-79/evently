@@ -7,7 +7,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
 
-  log("Handling a background message: ${message.messageId}");
 }
 
 class FcmServices {
@@ -32,12 +31,10 @@ class FcmServices {
       provisional: false,
       sound: true,
     );
-    log('User granted permission: ${settings.authorizationStatus}');
   }
 
   static Future<void> getToken() async {
     String? token = await messaging.getToken();
-    log("Fcm token $token");
   }
 
   static Future<void> handleForGroundNotification() async {
