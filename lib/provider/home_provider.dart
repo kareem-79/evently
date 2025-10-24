@@ -3,23 +3,17 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart' as geocoding;
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
-class HomeProvider extends ChangeNotifier{
+class HomeProvider extends ChangeNotifier {
   Location location = Location();
-   String locationMassage = "";
+  String locationMessage = "Fetching location...";
+  double? latitude;
+  double? longitude;
+
   HomeProvider() {
     getUserLocation();
-    setLocationListener();
   }
-
-  late final StreamSubscription<LocationData> locationStream;
-  CameraPosition cameraPosition = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 17,
-  );
-
 
   Future<bool> _getLocationPermission() async {
     PermissionStatus permissionStatus = await location.hasPermission();
@@ -39,41 +33,45 @@ class HomeProvider extends ChangeNotifier{
 
   Future<void> getUserLocation() async {
     bool permissionGranted = await _getLocationPermission();
-    if (!permissionGranted) return;
+    if (!permissionGranted) {
+      locationMessage = "Location permission denied";
+      notifyListeners();
+      return;
+    }
     bool isServiceEnabled = await _checkLocationServices();
-    if (!isServiceEnabled) return;
-    LocationData locationData = await location.getLocation();
-    await convertLatLngToAddress(locationData.latitude!, locationData.longitude!);
-    notifyListeners();
-  }
-
-
-  void setLocationListener() {
-    location.changeSettings(accuracy: LocationAccuracy.high, interval: 1000);
-    locationStream = location.onLocationChanged.listen((LocationData locationData) {
-      convertLatLngToAddress(locationData.latitude!, locationData.longitude!);
-    });
-  }
-
-   Future<void> convertLatLngToAddress(double lat, double lng) async {
+    if (!isServiceEnabled) {
+      locationMessage = "Location services disabled";
+      notifyListeners();
+      return;
+    }
     try {
-      List<geocoding.Placemark> placemarks = await geocoding
-          .placemarkFromCoordinates(lat, lng);
-      if (placemarks.isNotEmpty) {
-        final place = placemarks.first;
-        locationMassage = "${place.locality ?? ''},${place.country ?? ''}";
-      } else {
-        locationMassage = "Unknown location";
-      }
+      LocationData locationData = await location.getLocation();
+      latitude = locationData.latitude;
+      longitude = locationData.longitude;
+      await convertLatLngToAddress(locationData.latitude!, locationData.longitude!);
+      notifyListeners();
     } catch (e) {
-      locationMassage = "Error getting address";
-      log("Error converting to address: $e");
+      locationMessage = "Error getting location: $e";
+      latitude = null;
+      longitude = null;
+      log("Error getting location: $e");
+      notifyListeners();
     }
   }
 
-  @override
-  void dispose() {
-    locationStream.cancel();
-    super.dispose();
+  Future<void> convertLatLngToAddress(double lat, double lng) async {
+    try {
+      List<geocoding.Placemark> placemarks = await geocoding.placemarkFromCoordinates(lat, lng);
+      if (placemarks.isNotEmpty) {
+        final place = placemarks.first;
+        locationMessage = "${place.locality ?? ''}, ${place.country ?? ''}";
+      } else {
+        locationMessage = "Unknown location";
+      }
+    } catch (e) {
+      locationMessage = "Error getting address: $e";
+      log("Error converting to address: $e");
+    }
+    notifyListeners();
   }
 }

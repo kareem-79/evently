@@ -24,11 +24,8 @@ class _HomeTabState extends State<HomeTab> {
   late CategoryModel selectedCategory = CategoryModel.categoryWithAll(context)[0];
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<HomeProvider>(context, listen: false).getUserLocation();
-    });
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -74,8 +71,8 @@ class _HomeTabState extends State<HomeTab> {
                               ),
                               SizedBox(width: 4.w),
                               Text(
-                                provider.locationMassage.isNotEmpty
-                                    ? provider.locationMassage
+                                provider.locationMessage.isNotEmpty
+                                    ? provider.locationMessage
                                     : "Fetching location...",
                                 style: Theme.of(context).textTheme.headlineSmall,
                               ),

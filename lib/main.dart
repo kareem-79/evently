@@ -18,7 +18,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await PrefsManager.init();
-  await FcmServices.init();
   if (FirebaseAuth.instance.currentUser != null) {
     UserModel.currentUser = await FirebaseServices.getUserFromFireStore(
       FirebaseAuth.instance.currentUser!.uid,

@@ -5,6 +5,7 @@ class ConfigProvider extends ChangeNotifier {
   ThemeMode currentTheme = ThemeMode.light;
   Locale _locale = const Locale("en");
 
+
   bool get isDarkEnable => currentTheme == ThemeMode.dark;
 
   Locale get locale => _locale;
